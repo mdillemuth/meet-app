@@ -10,6 +10,9 @@ The app alows user to search for a city and get a list of events hosted in that 
 Described in terms of user stories and scenarios
 
 ### 1. Filter Events By City
+#### User Story: 
+- As a _user_ I should be able to _“filter events by city”_ so that _I can see the list of events that take place in that city_
+
 #### Scenario 1: When user hasn't searched for a city, show upcoming events from all cities
 - _Given_ user hasn't searched for any city
 - _When_ the user opens the app
@@ -26,6 +29,9 @@ Described in terms of user stories and scenarios
 - _Then_ their city should be changed to that city (i.e. "Berlin, Germany") and the user should receive a list of upcoming events in that city
 
 ### 2. Show/Hide An Event's Details
+#### User Story: 
+- As a _user_ I should be able to _“show an event's details”_ so that _I can see the details of a particular event_
+
 #### Scenario 1: An event element is collapsed by default
 - _Given_ the main page is open
 - _When_ the app is rendered
@@ -40,6 +46,9 @@ Described in terms of user stories and scenarios
 - _Then_ the event element will close and the user will see the list of collapsed event elements
 
 ### 3. Specify Number of Events
+#### User Story: 
+- As a _user_ I should be able to _“specify the number of events”_ so that _I can see modify the number of events displayed_
+
 #### Scenario 1: When user hasn't specified a number, 32 is the default number
 - _Given_ the main page is open
 - _When_  the app has rendered
@@ -50,6 +59,8 @@ Described in terms of user stories and scenarios
 - _Then_ the user can change the number of events displayed on input
 
 ### 4. Use The App When Offline
+#### User Story: 
+- As a _user_ I should be able to _“use the app offline”_ so that _I can see the cached data_
 #### Scenario 1: Show cached data when there's no internet connection
 - _Given_ there is no internet connection
 - _When_ the app is rendered
@@ -61,6 +72,8 @@ Described in terms of user stories and scenarios
 - _Then_ display an error message 
 
 ### 5. Data Visualization
+#### User Story: 
+- As a _user_ I should be able to _“view data graphs on the main page”_ so that _I quickly see how many events will take place in a given city and the popularity of event genres_
 #### Scenario 1: Show a chart with the number of upcoming events in each city
 - _Given_ the main page is open
 - _When_ the app is rendered
