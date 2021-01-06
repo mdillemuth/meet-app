@@ -14,7 +14,7 @@ Described in terms of user stories and scenarios
 
 #### User Story:
 
-- As a _user_ I should be able to _“filter events by city”_ so that _I can see the list of events that take place in that city_
+- As a _user_, I should be able to _“filter events by city”_ so that I can _see the list of events that take place in that city_
 
 #### Scenario 1: When user hasn't searched for a city, show upcoming events from all cities
 
@@ -38,7 +38,7 @@ Described in terms of user stories and scenarios
 
 #### User Story:
 
-- As a _user_ I should be able to _“show an event's details”_ so that _I can see the details of a particular event_
+- As a _user_, I would like to be able to _show/hide event details_ so that I can _see more/less information about an event_
 
 #### Scenario 1: An event element is collapsed by default
 
@@ -62,7 +62,7 @@ Described in terms of user stories and scenarios
 
 #### User Story:
 
-- As a _user_ I should be able to _“specify the number of events”_ so that _I can see modify the number of events displayed_
+- As a _user_, I would like to be able to _specify the number of events I want to view in the app_ so that I can _see more or fewer events in the events list at once_
 
 #### Scenario 1: When user hasn't specified a number, 32 is the default number
 
@@ -80,7 +80,7 @@ Described in terms of user stories and scenarios
 
 #### User Story:
 
-- As a _user_ I should be able to _“use the app offline”_ so that _I can see the cached data_
+- As a _user_, I would like to be able to _use the app when offline_ so that I can _see the events I viewed the last time I was online_
 
 #### Scenario 1: Show cached data when there's no internet connection
 
@@ -98,7 +98,7 @@ Described in terms of user stories and scenarios
 
 #### User Story:
 
-- As a _user_ I should be able to _“view data graphs on the main page”_ so that _I quickly see how many events will take place in a given city and the popularity of event genres_
+- As a _user_, I would like to be able to _see a chart showing the upcoming events in each city_ so that _I know what events are organized in which city_
 
 #### Scenario 1: Show a chart with the number of upcoming events in each city
 
