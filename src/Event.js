@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Event extends Component {
   state = {
-    isExpanded: false,
+    isExpanded: false, // Event is collapsed by default
   };
 
   // Toggle expand/collapse event on click
@@ -18,25 +18,29 @@ class Event extends Component {
     }
   };
 
+  // The elements displayed when event is expanded
   renderExpandedComponent = () => {
+    const { event } = this.props;
+
     if (this.state.isExpanded) {
       return (
         <div className='Expanded-Event'>
-          <h3 className='about'></h3>
-          <a className='link'></a>
-          <p className='description'></p>
+          <a className='link'>{event.htmlLink}</a>
+          <p className='description'>{event.description}</p>
         </div>
       );
     }
   };
 
   render() {
+    const { event } = this.props;
+
     return (
       <div className='Event'>
-        <h2 className='summary'></h2>
-        <div className='start-dateTime'></div>
-        <div className='start-timeZone'></div>
-        <div className='location'></div>
+        <h2 className='summary'>{event.summary}</h2>
+        <div className='start-dateTime'>{event.start.dateTime}</div>
+        <div className='start-timeZone'>{event.start.timeZone}</div>
+        <div className='location'>{event.location}</div>
         <button
           type='button'
           className='btn-details'
