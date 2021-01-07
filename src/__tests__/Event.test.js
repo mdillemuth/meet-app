@@ -8,19 +8,10 @@ describe('<Event /> component', () => {
     EventWrapper = shallow(<Event />);
   });
 
-  test('should render event summary', () => {
+  test('should render collapsed event component and its elements correctly', () => {
     expect(EventWrapper.find('.summary')).toHaveLength(1);
-  });
-
-  test('should render event start dateTime', () => {
     expect(EventWrapper.find('.start-dateTime')).toHaveLength(1);
-  });
-
-  test('should render event start timeZone', () => {
     expect(EventWrapper.find('.start-timeZone')).toHaveLength(1);
-  });
-
-  test('should render event location', () => {
     expect(EventWrapper.find('.location')).toHaveLength(1);
   });
 
@@ -28,7 +19,7 @@ describe('<Event /> component', () => {
     expect(EventWrapper.find('.btn-details')).toHaveLength(1);
   });
 
-  test('should render event component correctly', () => {
+  test('should render event component state correctly', () => {
     expect(EventWrapper.state('isExpanded')).toBe(false);
   });
 
@@ -37,19 +28,10 @@ describe('<Event /> component', () => {
     expect(EventWrapper.state('isExpanded')).toBe(true);
   });
 
-  test('should render expanded event component correctly', () => {
+  test('should render expanded event component and its elements correctly', () => {
     expect(EventWrapper.find('.Expanded-Event')).toHaveLength(1);
-  });
-
-  test('expanded event should render "About Event" header', () => {
     expect(EventWrapper.find('.about')).toHaveLength(1);
-  });
-
-  test('expanded event should render htmlLink ("see details on Google Calendar")', () => {
     expect(EventWrapper.find('.link')).toHaveLength(1);
-  });
-
-  test('expanded event should render event description', () => {
     expect(EventWrapper.find('.description')).toHaveLength(1);
   });
 
