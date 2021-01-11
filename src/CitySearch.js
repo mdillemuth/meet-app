@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class CitySearch extends Component {
   state = {
-    query: '',
+    query: "",
     suggestions: [],
   };
 
@@ -28,6 +28,7 @@ class CitySearch extends Component {
 
     return (
       <div className='CitySearch'>
+        <h2>Choose your nearest city</h2>
         <input
           type='text'
           className='city'

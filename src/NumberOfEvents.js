@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NumberOfEvents extends Component {
   state = {
@@ -16,7 +16,8 @@ class NumberOfEvents extends Component {
     const { numEvents } = this.state;
 
     return (
-      <div>
+      <div className='NumberOfEvents'>
+        <h2>Number of events</h2>
         <input
           type='text'
           className='number'
