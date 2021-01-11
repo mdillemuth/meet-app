@@ -6,6 +6,33 @@ Meet App is a serverless, progressive web application that uses the [Google Cale
 
 The app alows user to search for a city and get a list of events hosted in that city. The user can view charts that display how many events will take place in that city on upcoming days as well as view the popularity of event genres in the form of a pie chart.
 
+## Quick Start 🚀
+
+Currently the app can be viewed on [GitHub Pages](https://mdillemuth.github.io/meet-app/).
+To run it locally yourself, clone the repository, and complete the following steps:
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Start application with npm and run in browser
+
+_By default the app will run a local server on port: 3000_
+
+```bash
+npm run start
+```
+
+### Running application tests
+
+```bash
+npm run test
+```
+
+---
+
 ## Features
 
 Described in terms of user stories and scenarios
@@ -107,8 +134,6 @@ Described in terms of user stories and scenarios
 - _Then_ show a chart with the number of upcoming events in each city
 
 ## How to Run App
-
-Currently the app can be viewed on [GitHub Pages](https://mdillemuth.github.io/meet-app/)
 
 ## Dependencies
 
