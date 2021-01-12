@@ -23,6 +23,12 @@ class CitySearch extends Component {
     });
   };
 
+  renderSuggestionStyle = () => {
+    return this.state.query
+      ? "suggestions show-suggestions"
+      : "suggestions display-none";
+  };
+
   render() {
     const { query, suggestions } = this.state;
 
@@ -35,7 +41,7 @@ class CitySearch extends Component {
           value={query}
           onChange={this.handleInputChanged}
         />
-        <ul className='suggestions'>
+        <ul className={this.renderSuggestionStyle()}>
           {suggestions.map((suggestion) => (
             <li
               key={suggestion}

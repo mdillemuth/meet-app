@@ -17,14 +17,6 @@ $color-light: #cfdac8;
   src: url("./Poppins-Regular.ttf");
 }
 
-// Dynamic Styles
-.display-none {
-  display: none;
-}
-.showSuggestions {
-  display: block;
-}
-
 // General Styles
 body {
   font-family: "Poppins", sans-serif;
@@ -69,7 +61,7 @@ body {
 // App Component
 .App {
   padding: 2% 5%;
-  margin-top: 24px;
+  margin-top: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,13 +80,22 @@ body {
     width: 250px;
   }
 
+  .show-suggestions {
+    display: block;
+  }
+
+  .display-none {
+    display: none;
+  }
+
   .suggestions {
+    border-radius: 4px;
     width: 250px;
     position: absolute;
     z-index: 2;
     align-self: center;
     margin: 0;
-    top: 43px;
+    top: 69px;
     font-size: 14px;
     box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
   }
@@ -119,7 +120,7 @@ body {
 // NumberOfEvents Component
 .NumberOfEvents {
   width: 200px;
-  margin: 20px auto;
+  margin: 1em auto;
   text-align: center;
 
   input: {
@@ -144,6 +145,8 @@ body {
 
   .summary {
     font-weight: bold;
+    color: $color-primary;
+    margin-bottom: 0.5em;
   }
 
   .btn-details {
@@ -158,5 +161,15 @@ body {
     border-radius: 4px;
     outline: none;
     cursor: pointer;
+  }
+
+  .Expanded-Event {
+    h4 {
+      margin: 0.5em 0;
+    }
+
+    .link {
+      margin-bottom: 0.5em;
+    }
   }
 }

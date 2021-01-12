@@ -25,7 +25,7 @@ class Event extends Component {
     if (this.state.isExpanded) {
       return (
         <div className='Expanded-Event'>
-          <h4>About Event</h4>
+          <h4>About event:</h4>
           <a className='link' href={event.htmlLink}>
             See details on Google Calendar
           </a>
@@ -45,9 +45,14 @@ class Event extends Component {
     return (
       <div className='Event'>
         <h2 className='summary'>{event.summary}</h2>
-        <div className='start-dateTime'>{event.start.dateTime}</div>
-        <span className='start-timeZone'>{event.start.timeZone}</span>
-        <div className='location'>{event.location}</div>
+        <div className='time'>
+          <span className='start-dateTime'>{event.start.dateTime}</span>
+          <span className='start-timeZone'>{event.start.timeZone}</span>
+        </div>
+        <div className='location-container'>
+          <span className='summary-2'>@{event.summary} | </span>
+          <span className='location'>{event.location}</span>
+        </div>
         <div>{this.renderExpandedComponent()}</div>
         <button
           type='button'
