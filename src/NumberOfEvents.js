@@ -1,32 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
-class NumberOfEvents extends Component {
-  state = {
-    numEvents: 32,
-  };
-
-  handleInputChanged = (event) => {
+const NumberOfEvents = ({ numEvents, handleUpdateEvents }) => {
+  // Updates App numEvents state on input change
+  const onNumChange = (event) => {
     const value = event.target.value;
-    this.setState({
-      numEvents: value,
-    });
+    handleUpdateEvents(value);
   };
 
-  render() {
-    const { numEvents } = this.state;
+  return (
+    <div className='NumberOfEvents'>
+      <h2>Number of events</h2>
+      <input
+        type='number'
+        className='number'
+        value={numEvents}
+        onChange={onNumChange}
+      />
+    </div>
+  );
+};
 
-    return (
-      <div className='NumberOfEvents'>
-        <h2>Number of events</h2>
-        <input
-          type='text'
-          className='number'
-          value={numEvents}
-          onChange={this.handleInputChanged}
-        />
-      </div>
-    );
-  }
-}
+NumberOfEvents.propTypes = {
+  numEvents: PropTypes.number,
+  handleUpdateEvents: PropTypes.func,
+};
 
 export default NumberOfEvents;

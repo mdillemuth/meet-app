@@ -161,6 +161,11 @@ body {
     border-radius: 4px;
     outline: none;
     cursor: pointer;
+    transition: 250ms;
+  }
+  .btn-details:hover,
+  .btn-details:focus {
+    transform: scale(1.1);
   }
 
   .Expanded-Event {
