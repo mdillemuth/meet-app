@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 
 class Event extends Component {
   state = {
@@ -27,7 +29,12 @@ class Event extends Component {
         <div className='Expanded-Event'>
           <h4>About event:</h4>
           <div className='link-container'>
-            <a className='link' href={event.htmlLink} target='_blank'>
+            <a
+              className='link'
+              href={event.htmlLink}
+              rel='noreferrer'
+              target='_blank'
+            >
               See details on Google Calendar
             </a>
           </div>
@@ -37,8 +44,16 @@ class Event extends Component {
     }
   };
 
+  // Toggles button text
   renderButtonText = () => {
     return !this.state.isExpanded ? 'Show details' : 'Hide details';
+  };
+
+  // Reformats time data using moment.js
+  renderTime = () => {
+    const time = this.props.event.start.dateTime;
+    const formattedTime = moment(time, 'YYYY-MM-DD HH:mm').toDate();
+    return <span className='start-dateTime'>{`${formattedTime}`}</span>;
   };
 
   render() {
@@ -48,10 +63,7 @@ class Event extends Component {
       <div className='Event'>
         <h2 className='summary'>{event.summary}</h2>
         <div className='subheading'>
-          <div className='time'>
-            <span className='start-dateTime'>{event.start.dateTime}</span>
-            <span className='start-timeZone'>{event.start.timeZone}</span>
-          </div>
+          {this.renderTime()}
           <div className='location-container'>
             <span className='summary-2'>@{event.summary} | </span>
             <span className='location'>{event.location}</span>
@@ -69,5 +81,9 @@ class Event extends Component {
     );
   }
 }
+
+Event.propTypes = {
+  event: PropTypes.object.isRequired,
+};
 
 export default Event;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
-// import CitySearchAuto from './CitySearchAuto';
 import EventList from './EventList';
 import { extractLocations } from './api';
 import { mockData } from './mock-data';
@@ -11,18 +10,22 @@ class App extends Component {
   state = {
     events: mockData,
     location: 'all',
-    numEvents: 32,
+    numEvents: '32',
   };
+  // Using a string for numEvents prevents type conversion
 
+  // Filters events based on location and number
   updateEvents = (selectedLocation, selectedNum) => {
     const { location, numEvents } = this.state;
     let events = mockData;
 
     if (selectedLocation) {
+      // Filters events by location from user input
       let filteredEvents =
         selectedLocation === 'all'
           ? events
           : events.filter((e) => e.location === selectedLocation);
+      // Limits events to number specified
       filteredEvents = filteredEvents.slice(0, numEvents);
       return this.setState({
         events: filteredEvents,
@@ -30,6 +33,7 @@ class App extends Component {
         numEvents,
       });
     } else {
+      // Filters events by location from current app state
       let filteredEvents =
         location === 'all'
           ? events
@@ -43,6 +47,7 @@ class App extends Component {
   };
 
   render() {
+    // Pulling data for the suggestion dropdown
     let locations = extractLocations(mockData);
 
     const { numEvents, events } = this.state;
@@ -51,10 +56,6 @@ class App extends Component {
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
-        {/* <CitySearchAuto
-          locations={locations}
-          updateEvents={this.updateEvents}
-        /> */}
         <NumberOfEvents
           numEvents={numEvents}
           updateEvents={this.updateEvents}

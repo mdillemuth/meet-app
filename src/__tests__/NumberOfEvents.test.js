@@ -4,13 +4,19 @@ import NumberOfEvents from '../NumberOfEvents';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper, numEvents;
+
   beforeAll(() => {
-    numEvents = 32;
-    NumberOfEventsWrapper = shallow(<NumberOfEvents numEvents={numEvents} />);
+    // Mock function because propTypes requires it
+    const updateEvents = () => null;
+
+    numEvents = '32';
+    NumberOfEventsWrapper = shallow(
+      <NumberOfEvents numEvents={numEvents} updateEvents={updateEvents} />
+    );
   });
 
   test('should specify 32 as value for events by default', () => {
-    expect(NumberOfEventsWrapper.instance().props.numEvents).toBe(32);
+    expect(NumberOfEventsWrapper.instance().props.numEvents).toBe('32');
   });
 
   test('should render text input', () => {

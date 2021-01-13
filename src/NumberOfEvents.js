@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class NumberOfEvents extends Component {
   handleChange = (event) => {
@@ -20,5 +21,10 @@ class NumberOfEvents extends Component {
     );
   }
 }
+
+NumberOfEvents.propTypes = {
+  numEvents: PropTypes.string.isRequired,
+  updateEvents: PropTypes.func.isRequired,
+};
 
 export default NumberOfEvents;
