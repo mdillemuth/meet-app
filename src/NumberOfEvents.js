@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class NumberOfEvents extends Component {
   handleChange = (event) => {
     const value = event.target.value;
-    this.props.handleUpdateEvents(null, value);
+    this.props.updateEvents(null, value);
   };
 
   render() {

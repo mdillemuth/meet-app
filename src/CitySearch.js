@@ -12,7 +12,7 @@ class CitySearch extends Component {
       this.setState({
         query: '',
       });
-      this.props.handleUpdateEvents(suggestion);
+      this.props.updateEvents(suggestion);
       return;
     }
 
@@ -20,7 +20,7 @@ class CitySearch extends Component {
     this.setState({
       query: suggestion,
     });
-    this.props.handleUpdateEvents(suggestion);
+    this.props.updateEvents(suggestion);
   };
 
   // Displays suggestions based on user input (autocomplete feature)
@@ -63,7 +63,7 @@ class CitySearch extends Component {
               {suggestion}
             </li>
           ))}
-          <li key='all' onClick={() => this.handleItemClicked('showAll')}>
+          <li key='all' onClick={() => this.handleItemClicked('all')}>
             <b>See all cities</b>
           </li>
         </ul>
