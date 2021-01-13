@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class CitySearch extends Component {
   state = {
-    query: "",
+    query: '',
     suggestions: [],
   };
 
@@ -10,9 +10,10 @@ class CitySearch extends Component {
     this.setState({
       query: suggestion,
     });
+    this.props.handleUpdateEvents(suggestion);
   };
 
-  handleInputChanged = (event) => {
+  handleChange = (event) => {
     const value = event.target.value;
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
@@ -25,8 +26,8 @@ class CitySearch extends Component {
 
   renderSuggestionStyle = () => {
     return this.state.query
-      ? "suggestions show-suggestions"
-      : "suggestions display-none";
+      ? 'suggestions show-suggestions'
+      : 'suggestions display-none';
   };
 
   render() {
@@ -39,7 +40,7 @@ class CitySearch extends Component {
           type='text'
           className='city'
           value={query}
-          onChange={this.handleInputChanged}
+          onChange={this.handleChange}
         />
         <ul className={this.renderSuggestionStyle()}>
           {suggestions.map((suggestion) => (

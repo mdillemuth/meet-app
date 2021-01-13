@@ -13,13 +13,13 @@ $color-dark: #212121;
 $color-light: #cfdac8;
 
 @font-face {
-  font-family: "Poppins";
-  src: url("./Poppins-Regular.ttf");
+  font-family: 'Poppins';
+  src: url('./Poppins-Regular.ttf');
 }
 
 // General Styles
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: $color-light;
 
   ul {
@@ -40,8 +40,8 @@ body {
     font-weight: normal;
     font-size: 1.25em;
   }
-  input[type="text"],
-  input[type="number"] {
+  input[type='text'],
+  input[type='number'] {
     padding: 8px 6px 8px 10px;
     border-radius: 4px;
     outline: none;

@@ -1,19 +1,28 @@
-import React, { Component } from "react";
-import NumberOfEvents from "./NumberOfEvents";
-import CitySearch from "./CitySearch";
-import EventList from "./EventList";
-import { extractLocations } from "./api";
-import { mockData } from "./mock-data";
-import "./styles/App.scss";
+import React, { Component } from 'react';
+import NumberOfEvents from './NumberOfEvents';
+import CitySearch from './CitySearch';
+import EventList from './EventList';
+import { extractLocations } from './api';
+import { mockData } from './mock-data';
+import './styles/App.scss';
 
 class App extends Component {
   state = {
     events: mockData,
+    location: '',
     numEvents: 32,
   };
 
-  handleUpdateEvents = (numEvents) => {
-    const events = mockData.slice(0, numEvents);
+  // Filter events displayed by location and number
+  handleUpdateEvents = (location, numEvents) => {
+    let events = mockData; // Start with full list of events
+
+    // Filter by location when user selects location suggestion
+    if (location) {
+      events = events.filter((event) => event.location === location);
+    }
+
+    events = events.slice(0, numEvents); // Limit events to numEvents
     return this.setState({ numEvents, events });
   };
 
@@ -24,7 +33,10 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Meet App</h1>
-        <CitySearch locations={locations} />
+        <CitySearch
+          locations={locations}
+          handleUpdateEvents={this.handleUpdateEvents}
+        />
         <NumberOfEvents
           numEvents={numEvents}
           handleUpdateEvents={this.handleUpdateEvents}

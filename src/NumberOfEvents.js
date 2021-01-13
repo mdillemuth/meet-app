@@ -1,29 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
 
-const NumberOfEvents = ({ numEvents, handleUpdateEvents }) => {
-  // Updates App numEvents state on input change
-  const onNumChange = (event) => {
+class NumberOfEvents extends Component {
+  handleChange = (event) => {
     const value = event.target.value;
-    handleUpdateEvents(value);
+    this.props.handleUpdateEvents(null, value);
   };
 
-  return (
-    <div className='NumberOfEvents'>
-      <h2>Number of events</h2>
-      <input
-        type='number'
-        className='number'
-        value={numEvents}
-        onChange={onNumChange}
-      />
-    </div>
-  );
-};
-
-NumberOfEvents.propTypes = {
-  numEvents: PropTypes.number,
-  handleUpdateEvents: PropTypes.func,
-};
+  render() {
+    return (
+      <div className='NumberOfEvents'>
+        <h2>Number of events</h2>
+        <input
+          type='number'
+          className='number'
+          value={this.props.numEvents}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
+}
 
 export default NumberOfEvents;
