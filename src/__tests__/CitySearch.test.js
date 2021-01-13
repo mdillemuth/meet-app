@@ -3,17 +3,15 @@ import { shallow } from 'enzyme';
 import CitySearch from '../CitySearch';
 import { mockData } from '../mock-data';
 import { extractLocations } from '../api';
+import { fireEvent, getByTestId, within } from '@testing-library/react';
 
 describe('<CitySearch /> component', () => {
-  let locations, CitySearchWrapper, handleUpdateEvents;
+  let locations, CitySearchWrapper, updateEvents;
   beforeAll(() => {
     locations = extractLocations(mockData);
-    handleUpdateEvents = () => null;
+    updateEvents = () => null;
     CitySearchWrapper = shallow(
-      <CitySearch
-        locations={locations}
-        handleUpdateEvents={handleUpdateEvents}
-      />
+      <CitySearch locations={locations} updateEvents={updateEvents} />
     );
   });
 
@@ -22,16 +20,13 @@ describe('<CitySearch /> component', () => {
   });
 
   test('should hide list of suggestions by default', () => {
-    expect(CitySearchWrapper.find('.suggestions').props().className).toBe(
-      'suggestions display-none'
-    );
+    expect(CitySearchWrapper.find('.suggestions')).toHaveLength(0);
   });
 
   test('should render a list of search suggestions when user enters query', () => {
-    CitySearchWrapper.setState({ query: 'foo' });
-    expect(CitySearchWrapper.find('.suggestions').props().className).toBe(
-      'suggestions show-suggestions'
-    );
+    // Assign value to input field
+    const contentInput = getByTestId('content-input');
+    fireEvent.change(contentInput, { target: { value: 'foo' } });
   });
 
   test('should render text input correctly', () => {

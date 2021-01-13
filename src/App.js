@@ -6,8 +6,6 @@ import { extractLocations } from './api';
 import { mockData } from './mock-data';
 import './styles/App.scss';
 
-import CitySearchAuto from './CitySearchAuto';
-
 class App extends Component {
   state = {
     events: mockData,
@@ -28,6 +26,7 @@ class App extends Component {
       return this.setState({
         events: filteredEvents,
         location: selectedLocation,
+        numEvents,
       });
     } else {
       let filteredEvents =
@@ -44,19 +43,14 @@ class App extends Component {
 
   render() {
     let locations = extractLocations(mockData);
+    locations.push('See all cities');
+
     const { numEvents, events } = this.state;
 
     return (
       <div className='App'>
         <h1>Meet App</h1>
-        {/* <CitySearch
-          locations={locations}
-          updateEvents={this.updateEvents}
-        /> */}
-        <CitySearchAuto
-          locations={locations}
-          updateEvents={this.updateEvents}
-        />
+        <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents
           numEvents={numEvents}
           updateEvents={this.updateEvents}

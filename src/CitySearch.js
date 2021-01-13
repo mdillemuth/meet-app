@@ -1,72 +1,44 @@
 import React, { Component } from 'react';
 
-class CitySearch extends Component {
-  state = {
-    query: '',
-    suggestions: [],
-  };
+// Material UI imports
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
-  handleItemClicked = (suggestion) => {
-    // Resets events when user clicks 'show all cities'
-    if (suggestion === 'showAll') {
-      this.setState({
-        query: '',
-      });
-      this.props.updateEvents(suggestion);
-      return;
+class CitySearch extends Component {
+  // Updates filtered events on selection
+  onChange = (event, location, reason) => {
+    if (location === 'See all cities') {
+      return this.props.updateEvents('all');
     }
 
-    // Sets events to user's selected location
-    this.setState({
-      query: suggestion,
-    });
-    this.props.updateEvents(suggestion);
-  };
+    this.props.updateEvents(location);
 
-  // Displays suggestions based on user input (autocomplete feature)
-  handleChange = (event) => {
-    const value = event.target.value;
-    const suggestions = this.props.locations.filter((location) => {
-      return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
-    });
-    this.setState({
-      query: value,
-      suggestions,
-    });
-  };
-
-  // Suggestions only display when user has entered a query
-  renderSuggestionStyle = () => {
-    return this.state.query
-      ? 'suggestions show-suggestions'
-      : 'suggestions display-none';
+    // Resets events when user clears selection
+    if (reason === 'clear') {
+      this.props.updateEvents('all');
+    }
   };
 
   render() {
-    const { query, suggestions } = this.state;
-
     return (
-      <div className='CitySearch'>
+      <div>
         <h2>Choose your nearest city</h2>
-        <input
-          type='text'
+        <Autocomplete
+          style={{
+            backgroundColor: '#ffffff',
+            borderRadius: 5,
+            width: 250,
+          }}
           className='city'
-          value={query}
-          onChange={this.handleChange}
+          options={this.props.locations}
+          getOptionLabel={(option) => option}
+          size='small'
+          onChange={this.onChange}
+          fullWidth
+          renderInput={(params) => (
+            <TextField {...params} className='suggestions' variant='outlined' />
+          )}
         />
-        <ul className={this.renderSuggestionStyle()}>
-          {suggestions.map((suggestion) => (
-            <li
-              key={suggestion}
-              onClick={() => this.handleItemClicked(suggestion)}
-            >
-              {suggestion}
-            </li>
-          ))}
-          <li key='all' onClick={() => this.handleItemClicked('all')}>
-            <b>See all cities</b>
-          </li>
-        </ul>
       </div>
     );
   }

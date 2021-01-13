@@ -53,55 +53,6 @@ body {
   text-align: center;
 }
 
-// CitySearch Component
-.CitySearch {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin: auto;
-  position: relative;
-
-  .city {
-    width: 250px;
-  }
-
-  .show-suggestions {
-    display: block;
-  }
-
-  .display-none {
-    display: none;
-  }
-
-  .suggestions {
-    border-radius: 5px;
-    width: 250px;
-    position: absolute;
-    z-index: 2;
-    align-self: center;
-    margin: 0;
-    top: 69px;
-    font-size: 14px;
-    box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
-  }
-
-  .suggestions > li {
-    text-align: left;
-    padding: 8px 6px 8px 10px;
-    background-color: #eee;
-    cursor: default;
-  }
-
-  .suggestions > li:last-child {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-
-  .suggestions > li:hover {
-    background-color: #bcdcdb;
-  }
-}
-
 // NumberOfEvents Component
 .NumberOfEvents {
   width: 200px;
