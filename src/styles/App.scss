@@ -8,9 +8,10 @@
 }
 
 // Variables
-$color-primary: #3f51b5;
-$color-dark: #212121;
-$color-light: #cfdac8;
+$color-primary: #f76e6f;
+$color-secondary: #014e58;
+$color-dark: #032e34;
+$color-light: #feffff;
 
 @font-face {
   font-family: 'Poppins';
@@ -20,7 +21,7 @@ $color-light: #cfdac8;
 // General Styles
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: $color-light;
+  background-color: $color-dark;
 
   ul {
     padding: 0;
@@ -37,9 +38,29 @@ body {
     font-size: 2.5em;
   }
   h2 {
-    color: $color-dark;
+    color: $color-light;
     font-weight: normal;
     font-size: 1.1em;
+  }
+
+  input {
+    text-align: center;
+    padding: 8px 6px 8px 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid $color-dark;
+    background-color: #ffffff;
+    color: $color-dark;
+    font-size: 14px;
+    line-height: 20px;
+    align-self: center;
+    height: 38px;
+    transition: 250ms;
+  }
+  input:focus,
+  input:hover {
+    border: 2px solid $color-primary;
+    transform: scale(1.05);
   }
 }
 
@@ -53,6 +74,55 @@ body {
   text-align: center;
 }
 
+// CitySearch Component
+.CitySearch {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+  position: relative;
+
+  .city {
+    width: 250px;
+  }
+
+  .show-suggestions {
+    display: block;
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  .suggestions {
+    border-radius: 4px;
+    width: 250px;
+    position: absolute;
+    z-index: 2;
+    align-self: center;
+    margin: 0;
+    top: 69px;
+    font-size: 14px;
+    box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+  }
+
+  .suggestions > li {
+    text-align: left;
+    padding: 8px 6px 8px 10px;
+    background-color: #eee;
+    cursor: default;
+  }
+
+  .suggestions > li:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .suggestions > li:hover {
+    background-color: #bcdcdb;
+  }
+}
+
 // NumberOfEvents Component
 .NumberOfEvents {
   width: 200px;
@@ -60,23 +130,6 @@ body {
   margin-top: 0.5em;
   margin-bottom: 1em;
   text-align: center;
-
-  input {
-    text-align: center;
-    padding: 8px 6px 8px 10px;
-    border-radius: 5px;
-    outline: none;
-    border: 2px solid $color-light;
-    background-color: #ffffff;
-    color: $color-dark;
-    font-size: 14px;
-    line-height: 20px;
-    align-self: center;
-    height: 38px;
-  }
-  input:focus {
-    border: 2px solid $color-primary;
-  }
 }
 
 // EventList Component
@@ -86,19 +139,28 @@ body {
 
 // Event Component
 .Event {
-  background-color: #ffffff;
+  background-color: $color-secondary;
   padding: 1em;
   margin-bottom: 0.5em;
   text-align: left;
   border-radius: 5px;
   position: relative;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.12);
+
+  div {
+    color: $color-light;
+  }
 
   .summary {
     font-size: 1.5em;
     font-weight: bold;
     color: $color-primary;
     margin-bottom: 0.5em;
+  }
+
+  .subheading {
+    font-size: 1em;
+    margin-bottom: 1em;
   }
 
   .description {
@@ -127,11 +189,17 @@ body {
 
   .Expanded-Event {
     h4 {
-      margin: 0.5em 0;
+      margin: 1em 0;
+      color: $color-primary;
     }
 
-    .link {
-      margin-bottom: 0.5em;
+    .link-container {
+      margin-bottom: 1em;
+    }
+
+    a.link {
+      color: $color-primary;
+      transition: 250ms;
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Event extends Component {
   state = {
@@ -26,9 +26,11 @@ class Event extends Component {
       return (
         <div className='Expanded-Event'>
           <h4>About event:</h4>
-          <a className='link' href={event.htmlLink}>
-            See details on Google Calendar
-          </a>
+          <div className='link-container'>
+            <a className='link' href={event.htmlLink} target='_blank'>
+              See details on Google Calendar
+            </a>
+          </div>
           <p className='description'>{event.description}</p>
         </div>
       );
@@ -36,7 +38,7 @@ class Event extends Component {
   };
 
   renderButtonText = () => {
-    return !this.state.isExpanded ? "Show details" : "Hide details";
+    return !this.state.isExpanded ? 'Show details' : 'Hide details';
   };
 
   render() {
@@ -45,13 +47,15 @@ class Event extends Component {
     return (
       <div className='Event'>
         <h2 className='summary'>{event.summary}</h2>
-        <div className='time'>
-          <span className='start-dateTime'>{event.start.dateTime}</span>
-          <span className='start-timeZone'>{event.start.timeZone}</span>
-        </div>
-        <div className='location-container'>
-          <span className='summary-2'>@{event.summary} | </span>
-          <span className='location'>{event.location}</span>
+        <div className='subheading'>
+          <div className='time'>
+            <span className='start-dateTime'>{event.start.dateTime}</span>
+            <span className='start-timeZone'>{event.start.timeZone}</span>
+          </div>
+          <div className='location-container'>
+            <span className='summary-2'>@{event.summary} | </span>
+            <span className='location'>{event.location}</span>
+          </div>
         </div>
         <div>{this.renderExpandedComponent()}</div>
         <button

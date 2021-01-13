@@ -5,13 +5,15 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
 class CitySearchAuto extends Component {
-  state = {
-    query: '',
-  };
-
+  // Updates filtered events on selection
   onChange = (event, location, reason) => {
+    if (location === 'See all cities') {
+      return this.props.updateEvents('all');
+    }
+
     this.props.updateEvents(location);
 
+    // Resets events when user clears selection
     if (reason === 'clear') {
       this.props.updateEvents('all');
     }
@@ -27,14 +29,15 @@ class CitySearchAuto extends Component {
             borderRadius: 5,
             width: 250,
           }}
-          id='location'
+          className='city'
           options={this.props.locations}
           getOptionLabel={(option) => option}
           size='small'
           onChange={this.onChange}
-          onClose={this.onClose}
           fullWidth
-          renderInput={(params) => <TextField {...params} variant='outlined' />}
+          renderInput={(params) => (
+            <TextField {...params} className='suggestions' variant='outlined' />
+          )}
         />
       </div>
     );

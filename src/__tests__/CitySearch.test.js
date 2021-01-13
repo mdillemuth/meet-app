@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import CitySearch from '../CitySearch';
 import { mockData } from '../mock-data';
 import { extractLocations } from '../api';
-import { fireEvent, getByTestId, within } from '@testing-library/react';
 
 describe('<CitySearch /> component', () => {
   let locations, CitySearchWrapper, updateEvents;
@@ -24,9 +23,9 @@ describe('<CitySearch /> component', () => {
   });
 
   test('should render a list of search suggestions when user enters query', () => {
-    // Assign value to input field
-    const contentInput = getByTestId('content-input');
-    fireEvent.change(contentInput, { target: { value: 'foo' } });
+    const eventObject = { target: { value: 'Berlin' } };
+    CitySearchWrapper.find('.city').simulate('change', eventObject);
+    expect(CitySearchWrapper.state('isShown')).toBe(true);
   });
 
   test('should render text input correctly', () => {

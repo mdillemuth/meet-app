@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
+// import CitySearchAuto from './CitySearchAuto';
 import EventList from './EventList';
 import { extractLocations } from './api';
 import { mockData } from './mock-data';
@@ -43,7 +44,6 @@ class App extends Component {
 
   render() {
     let locations = extractLocations(mockData);
-    locations.push('See all cities');
 
     const { numEvents, events } = this.state;
 
@@ -51,6 +51,10 @@ class App extends Component {
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
+        {/* <CitySearchAuto
+          locations={locations}
+          updateEvents={this.updateEvents}
+        /> */}
         <NumberOfEvents
           numEvents={numEvents}
           updateEvents={this.updateEvents}
