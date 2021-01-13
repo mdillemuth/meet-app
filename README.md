@@ -1,5 +1,7 @@
 # Meet App
 
+![App Showcase Gif](/meet-app-4-3-showcase.gif)
+
 ## Description
 
 Meet App is a serverless, progressive web application that uses the [Google Calendar API](https://developers.google.com/calendar) to fetch upcoming events. The app is built with React using a test-driven development (TDD) approach. The serverless function is hosted by the cloud provider AWS.
@@ -22,13 +24,13 @@ npm install
 _By default the app will run a local server on port: 3000_
 
 ```bash
-npm run start
+npm start
 ```
 
 ### Running application tests
 
 ```bash
-npm run test
+npm test
 ```
 
 ---
