@@ -7,12 +7,23 @@ class CitySearch extends Component {
   };
 
   handleItemClicked = (suggestion) => {
+    // Resets events when user clicks 'show all cities'
+    if (suggestion === 'showAll') {
+      this.setState({
+        query: '',
+      });
+      this.props.handleUpdateEvents(suggestion);
+      return;
+    }
+
+    // Sets events to user's selected location
     this.setState({
       query: suggestion,
     });
     this.props.handleUpdateEvents(suggestion);
   };
 
+  // Displays suggestions based on user input (autocomplete feature)
   handleChange = (event) => {
     const value = event.target.value;
     const suggestions = this.props.locations.filter((location) => {
@@ -24,6 +35,7 @@ class CitySearch extends Component {
     });
   };
 
+  // Suggestions only display when user has entered a query
   renderSuggestionStyle = () => {
     return this.state.query
       ? 'suggestions show-suggestions'
@@ -51,7 +63,7 @@ class CitySearch extends Component {
               {suggestion}
             </li>
           ))}
-          <li key='all'>
+          <li key='all' onClick={() => this.handleItemClicked('showAll')}>
             <b>See all cities</b>
           </li>
         </ul>

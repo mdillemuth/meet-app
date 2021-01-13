@@ -22,6 +22,11 @@ class App extends Component {
       events = events.filter((event) => event.location === location);
     }
 
+    // Resets events when user chooses 'See all cities'
+    if (location === 'showAll') {
+      events = mockData;
+    }
+
     events = events.slice(0, numEvents); // Limit events to numEvents
     return this.setState({ numEvents, events });
   };
