@@ -72,7 +72,7 @@ describe('<App /> component', () => {
     expect(AppWrapper.state().events).toEqual(events);
   });
 
-  test('passing null as location to updateEvents should not modify previous location state ', () => {
+  test('passing null as location to updateEvents should not modify previous location state', () => {
     const initialState = 'all';
     const instance = AppWrapper.instance();
     instance.updateEvents(null, '32');
@@ -87,5 +87,17 @@ describe('<App /> component', () => {
     // Pass 5 as numEvents to updateEvents()
     instance.updateEvents(null, '5');
     expect(AppWrapper.state().events.length).toEqual(expectedNumEvents);
+  });
+
+  test('passing null location should continue to filter based on current state location', () => {
+    // Use case:
+    // User sets 'London' to location
+    // User changes numEvents to '25'
+    // Expected: 'London' filter persists
+
+    const instance = AppWrapper.instance();
+    instance.updateEvents('London');
+    instance.updateEvents(null, '25');
+    expect(AppWrapper.state().location).toEqual('London');
   });
 });
