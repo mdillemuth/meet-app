@@ -6,9 +6,7 @@ describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper, numEvents;
 
   beforeAll(() => {
-    // Mock function because propTypes requires it
-    const updateEvents = () => null;
-
+    const updateEvents = jest.fn(location, numEvents);
     numEvents = '32';
     NumberOfEventsWrapper = shallow(
       <NumberOfEvents numEvents={numEvents} updateEvents={updateEvents} />
@@ -26,5 +24,14 @@ describe('<NumberOfEvents /> component', () => {
   test('number input should render numEvents as its value correctly', () => {
     const numEvents = NumberOfEventsWrapper.instance().props.numEvents;
     expect(NumberOfEventsWrapper.find('.number').prop('value')).toBe(numEvents);
+  });
+
+  test('should correctly pass input value to updateEvents as second argument (numEvents)', () => {
+    const instance = NumberOfEventsWrapper.instance();
+    const eventObject = { target: { value: '25' } };
+
+    instance.handleChange(eventObject);
+
+    expect(instance.props.updateEvents.mock.calls[0][1]).toBe('25');
   });
 });
