@@ -61,12 +61,14 @@ class Event extends Component {
 
     return (
       <div className='Event'>
-        <h2 className='summary'>{event.summary}</h2>
-        <div className='subheading'>
-          {this.renderTime()}
-          <div className='location-container'>
-            <span className='summary-2'>@{event.summary} | </span>
-            <span className='location'>{event.location}</span>
+        <div className='heading'>
+          <h2 className='summary'>{event.summary}</h2>
+          <div className='subheading'>
+            <div className='time'>{this.renderTime()}</div>
+            <div className='location-container'>
+              <span className='summary-2'>@{event.summary} | </span>
+              <span className='location'>{event.location}</span>
+            </div>
           </div>
         </div>
         <div>{this.renderExpandedComponent()}</div>

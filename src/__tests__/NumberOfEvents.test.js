@@ -3,18 +3,21 @@ import { shallow } from 'enzyme';
 import NumberOfEvents from '../NumberOfEvents';
 
 describe('<NumberOfEvents /> component', () => {
-  let NumberOfEventsWrapper, numEvents;
+  let NumberOfEventsWrapper, eventCount;
 
   beforeAll(() => {
-    const updateEvents = jest.fn(location, numEvents);
-    numEvents = '32';
+    const updateEvents = jest.fn(location, eventCount);
+    const numberOfEvents = '24';
     NumberOfEventsWrapper = shallow(
-      <NumberOfEvents numEvents={numEvents} updateEvents={updateEvents} />
+      <NumberOfEvents
+        numberOfEvents={numberOfEvents}
+        updateEvents={updateEvents}
+      />
     );
   });
 
-  test('should specify 32 as value for events by default', () => {
-    expect(NumberOfEventsWrapper.instance().props.numEvents).toBe('32');
+  test('should specify 24 as value for events by default', () => {
+    expect(NumberOfEventsWrapper.instance().props.numberOfEvents).toBe('24');
   });
 
   test('should render text input', () => {
@@ -22,16 +25,17 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('number input should render numEvents as its value correctly', () => {
-    const numEvents = NumberOfEventsWrapper.instance().props.numEvents;
-    expect(NumberOfEventsWrapper.find('.number').prop('value')).toBe(numEvents);
+    const numberOfEvents = NumberOfEventsWrapper.instance().props
+      .numberOfEvents;
+    expect(NumberOfEventsWrapper.find('.number').prop('value')).toBe(
+      numberOfEvents
+    );
   });
 
-  test('should correctly pass input value to updateEvents as second argument (numEvents)', () => {
+  test('should correctly pass input value to updateEvents as second argument (numberOfEvents)', () => {
     const instance = NumberOfEventsWrapper.instance();
-    const eventObject = { target: { value: '25' } };
-
+    const eventObject = { target: { value: '10' } };
     instance.handleChange(eventObject);
-
-    expect(instance.props.updateEvents.mock.calls[0][1]).toBe('25');
+    expect(instance.props.updateEvents.mock.calls[0][1]).toBe('10');
   });
 });

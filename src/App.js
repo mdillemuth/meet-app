@@ -2,62 +2,91 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import { extractLocations } from './api';
-import { mockData } from './mock-data';
+import { extractLocations, getEvents, checkToken, getToken } from './api';
 import './styles/App.scss';
+import './styles/nprogress.css';
 
 class App extends Component {
   state = {
-    events: mockData,
-    location: 'all',
-    numEvents: '32',
+    events: [],
+    locations: [],
+    currentLocation: 'all',
+    numberOfEvents: '24',
   };
-  // Using a string for numEvents prevents type conversion
+  // numberOfEvents uses a string to prevent type conversion
 
-  // Filters events based on location and number
-  updateEvents = (selectedLocation, selectedNum) => {
-    const { location, numEvents } = this.state;
-    let events = mockData;
+  async componentDidMount() {
+    const accessToken = localStorage.getItem('access_token');
+    const validToken =
+      accessToken !== null ? await checkToken(accessToken) : false;
 
-    if (selectedLocation) {
-      // Filters events by location from user input
-      let filteredEvents =
-        selectedLocation === 'all'
-          ? events
-          : events.filter((e) => e.location === selectedLocation);
-      // Limits events to number specified
-      filteredEvents = filteredEvents.slice(0, numEvents);
-      return this.setState({
-        events: filteredEvents,
-        location: selectedLocation,
-        numEvents,
+    if (validToken) this.updateEvents();
+
+    this.mounted = true;
+
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
+    });
+    // this.updateEvents();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  // Filters events based on location and number given in user input
+  updateEvents = (location, eventCount) => {
+    const { currentLocation, numberOfEvents } = this.state;
+
+    // If user selects a location from input
+    if (location) {
+      getEvents().then((response) => {
+        // Applies new filter for location
+        const locationEvents =
+          location === 'all'
+            ? response.events
+            : response.events.filter((event) => event.location === location);
+        const events = locationEvents.slice(0, numberOfEvents);
+        const locations = response.locations;
+        return this.setState({
+          events,
+          locations,
+          currentLocation: location,
+        });
       });
-    } else {
-      // Filters events by location from current app state
-      let filteredEvents =
-        location === 'all'
-          ? events
-          : events.filter((e) => e.location === location);
-      filteredEvents = filteredEvents.slice(0, selectedNum);
-      return this.setState({
-        events: filteredEvents,
-        numEvents: selectedNum,
+    }
+    // If user does not select a location, but chooses number of events
+    else {
+      getEvents().then((response) => {
+        // Persists location filter from state
+        const locationEvents =
+          currentLocation === 'all'
+            ? response.events
+            : response.events.filter(
+                (event) => event.location === currentLocation
+              );
+        const events = locationEvents.slice(0, eventCount);
+        const locations = response.locations;
+        return this.setState({
+          events,
+          locations,
+          numberOfEvents: eventCount,
+        });
       });
     }
   };
 
   render() {
-    // Pulling data for the suggestion dropdown
-    let locations = extractLocations(mockData);
-
-    const { numEvents, events } = this.state;
+    const { numberOfEvents, events, locations } = this.state;
 
     return (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents
-          numEvents={numEvents}
+          numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
         <EventList events={events} />

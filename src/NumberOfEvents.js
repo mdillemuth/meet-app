@@ -14,7 +14,7 @@ class NumberOfEvents extends Component {
         <input
           type='number'
           className='number'
-          value={this.props.numEvents}
+          value={this.props.numberOfEvents}
           onChange={this.handleChange}
         />
       </div>
@@ -23,7 +23,7 @@ class NumberOfEvents extends Component {
 }
 
 NumberOfEvents.propTypes = {
-  numEvents: PropTypes.string.isRequired,
+  numberOfEvents: PropTypes.string.isRequired,
   updateEvents: PropTypes.func.isRequired,
 };
 

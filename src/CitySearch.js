@@ -5,28 +5,25 @@ class CitySearch extends Component {
   state = {
     query: '',
     suggestions: [],
-    isShown: false,
+    showSuggestions: false,
+    locations: this.props.locations,
   };
 
   handleItemClicked = (suggestion) => {
-    // Closes suggestions menu
-    this.setState({
-      isShown: false,
-    });
-
-    // Resets events when user clicks 'show all cities'
-    if (suggestion === 'all') {
-      this.setState({
-        query: '',
-      });
-      return this.props.updateEvents(suggestion);
-    }
-
-    // Sets events to user's selected location
     this.setState({
       query: suggestion,
+      suggestions: [],
+      showSuggestions: false,
     });
     this.props.updateEvents(suggestion);
+
+    // Resets events when user clicks 'show all cities'
+    // if (suggestion === 'all') {
+    //   this.setState({
+    //     query: '',
+    //   });
+    //   return this.props.updateEvents(suggestion);
+    // }
   };
 
   // Displays suggestions based on user input (autocomplete feature)
@@ -38,17 +35,12 @@ class CitySearch extends Component {
     this.setState({
       query: value,
       suggestions,
-      isShown: true,
+      showSuggestions: true,
     });
   };
 
-  // Suggestions only display when user has entered a query
-  renderSuggestionStyle = () => {
-    return this.state.isShown ? 'suggestions show-suggestions' : 'display-none';
-  };
-
   render() {
-    const { query, suggestions } = this.state;
+    const { query, suggestions, showSuggestions } = this.state;
 
     return (
       <div className='CitySearch'>
@@ -58,8 +50,14 @@ class CitySearch extends Component {
           className='city'
           value={query}
           onChange={this.handleChange}
+          onFocus={() => {
+            this.setState({ showSuggestions: true });
+          }}
         />
-        <ul className={this.renderSuggestionStyle()}>
+        <ul
+          className='suggestions'
+          style={showSuggestions ? {} : { display: 'none' }}
+        >
           {suggestions.map((suggestion) => (
             <li
               key={suggestion}

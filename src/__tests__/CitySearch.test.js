@@ -19,13 +19,13 @@ describe('<CitySearch /> component', () => {
   });
 
   test('should hide list of suggestions by default', () => {
-    expect(CitySearchWrapper.find('.suggestions')).toHaveLength(0);
+    expect(CitySearchWrapper.state('showSuggestions')).toBe(false);
   });
 
   test('should render a list of search suggestions when user enters query', () => {
     const eventObject = { target: { value: 'Berlin' } };
     CitySearchWrapper.find('.city').simulate('change', eventObject);
-    expect(CitySearchWrapper.state('isShown')).toBe(true);
+    expect(CitySearchWrapper.state('showSuggestions')).toBe(true);
   });
 
   test('should render text input correctly', () => {
@@ -75,5 +75,37 @@ describe('<CitySearch /> component', () => {
     const suggestions = CitySearchWrapper.state('suggestions');
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
     expect(CitySearchWrapper.state('query')).toBe(suggestions[0]);
+  });
+
+  // 4.4
+  test('selecting CitySearch input reveals the suggestions list', () => {
+    CitySearchWrapper.find('.city').simulate('focus');
+    expect(CitySearchWrapper.state('showSuggestions')).toBe(true);
+    expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({
+      display: 'none',
+    });
+  });
+
+  // 4.4
+  test('selecting a suggestion should hide the suggestions list', () => {
+    CitySearchWrapper.setState({
+      query: 'Berlin',
+      showSuggestions: undefined,
+    });
+    CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
+    expect(CitySearchWrapper.state('showSuggestions')).toBe(false);
+    expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({
+      display: 'none',
+    });
+  });
+
+  // 4.4
+  test('suggestions list will appear upon having a focus on city input field', () => {
+    CitySearchWrapper.setState({
+      query: '',
+      suggestions: locations,
+    });
+    CitySearchWrapper.find('.city').simulate('focus');
+    expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({});
   });
 });

@@ -8,20 +8,19 @@
 }
 
 // Variables
-$color-primary: #f76e6f;
-$color-secondary: #014e58;
-$color-dark: #032e34;
-$color-light: #feffff;
+$color-primary: #6663e8;
+$color-dark: #212121;
+$color-light: #ffffff;
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('./Poppins-Regular.ttf');
+  font-family: 'Roboto';
+  src: url('./Roboto-Regular.ttf');
 }
 
 // General Styles
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: $color-dark;
+  font-family: 'Roboto', sans-serif;
+  background-color: $color-primary;
 
   ul {
     padding: 0;
@@ -33,11 +32,13 @@ body {
   }
 
   h1 {
-    color: $color-primary;
+    margin-bottom: 0.25em;
+    color: $color-light;
     letter-spacing: 1px;
     font-size: 2.5em;
   }
   h2 {
+    opacity: 0.9;
     color: $color-light;
     font-weight: normal;
     font-size: 1.1em;
@@ -47,20 +48,15 @@ body {
     text-align: center;
     padding: 8px 6px 8px 10px;
     border-radius: 5px;
+    border: 2px solid $color-light;
     outline: none;
-    border: 2px solid $color-dark;
     background-color: #ffffff;
     color: $color-dark;
     font-size: 14px;
+    font-weight: bold;
     line-height: 20px;
     align-self: center;
     height: 38px;
-    transition: 250ms;
-  }
-  input:focus,
-  input:hover {
-    border: 2px solid $color-primary;
-    transform: scale(1.05);
   }
 }
 
@@ -101,15 +97,15 @@ body {
     z-index: 2;
     align-self: center;
     margin: 0;
-    top: 69px;
+    top: 54px;
     font-size: 14px;
-    box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+    // box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
   }
 
   .suggestions > li {
     text-align: left;
     padding: 8px 6px 8px 10px;
-    background-color: #eee;
+    background-color: #dddddd;
     cursor: default;
   }
 
@@ -119,7 +115,8 @@ body {
   }
 
   .suggestions > li:hover {
-    background-color: #bcdcdb;
+    background-color: $color-primary;
+    color: $color-light;
   }
 }
 
@@ -135,25 +132,34 @@ body {
 // EventList Component
 .EventList {
   width: 100%;
+
+  // background-color: #fff;
+  // padding: 1em;
+  // display: grid;
+  // justify-content: center;
+  // grid-template-columns: repeat(2, 1fr);
+  // gap: 1em;
 }
 
 // Event Component
 .Event {
-  background-color: $color-secondary;
+  // max-width: 700px;
+  background-color: $color-light;
+  color: $color-dark;
   padding: 1em;
   margin-bottom: 0.5em;
   text-align: left;
   border-radius: 5px;
   position: relative;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.12);
-
-  div {
-    color: $color-light;
-  }
+  opacity: 0.92;
 
   .summary {
+    opacity: 1;
     font-size: 1.5em;
     font-weight: bold;
+    letter-spacing: 0.5px;
+    word-spacing: 2px;
     color: $color-primary;
     margin-bottom: 0.5em;
   }
@@ -163,15 +169,19 @@ body {
     margin-bottom: 1em;
   }
 
+  .time {
+    font-weight: bold;
+  }
+
   .description {
     margin-bottom: 3em;
   }
 
   .btn-details {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     border: none;
     background-color: $color-primary;
-    color: $color-light;
+    color: #ffffff;
     width: 100px;
     position: absolute;
     right: 1em;
@@ -180,11 +190,7 @@ body {
     border-radius: 5px;
     outline: none;
     cursor: pointer;
-    transition: 250ms;
     font-weight: bold;
-  }
-  .btn-details:hover {
-    transform: scale(1.1);
   }
 
   .Expanded-Event {
@@ -199,7 +205,6 @@ body {
 
     a.link {
       color: $color-primary;
-      transition: 250ms;
     }
   }
 }
