@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/meet-app/static/css/main.8a7d6db5.chunk.css",
-    "main.js": "/meet-app/static/js/main.1cf1872b.chunk.js",
-    "main.js.map": "/meet-app/static/js/main.1cf1872b.chunk.js.map",
+    "main.css": "/meet-app/static/css/main.02f8857e.chunk.css",
+    "main.js": "/meet-app/static/js/main.682e32fa.chunk.js",
+    "main.js.map": "/meet-app/static/js/main.682e32fa.chunk.js.map",
     "runtime-main.js": "/meet-app/static/js/runtime-main.60c79d87.js",
     "runtime-main.js.map": "/meet-app/static/js/runtime-main.60c79d87.js.map",
-    "static/js/2.1b43a219.chunk.js": "/meet-app/static/js/2.1b43a219.chunk.js",
-    "static/js/2.1b43a219.chunk.js.map": "/meet-app/static/js/2.1b43a219.chunk.js.map",
+    "static/js/2.a8f10317.chunk.js": "/meet-app/static/js/2.a8f10317.chunk.js",
+    "static/js/2.a8f10317.chunk.js.map": "/meet-app/static/js/2.a8f10317.chunk.js.map",
     "index.html": "/meet-app/index.html",
-    "static/css/main.8a7d6db5.chunk.css.map": "/meet-app/static/css/main.8a7d6db5.chunk.css.map",
-    "static/js/2.1b43a219.chunk.js.LICENSE.txt": "/meet-app/static/js/2.1b43a219.chunk.js.LICENSE.txt",
-    "static/media/App.scss": "/meet-app/static/media/Poppins-Regular.8081832f.ttf"
+    "static/css/main.02f8857e.chunk.css.map": "/meet-app/static/css/main.02f8857e.chunk.css.map",
+    "static/js/2.a8f10317.chunk.js.LICENSE.txt": "/meet-app/static/js/2.a8f10317.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/meet-app/static/media/Roboto-Regular.03523cf5.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.60c79d87.js",
-    "static/js/2.1b43a219.chunk.js",
-    "static/css/main.8a7d6db5.chunk.css",
-    "static/js/main.1cf1872b.chunk.js"
+    "static/js/2.a8f10317.chunk.js",
+    "static/css/main.02f8857e.chunk.css",
+    "static/js/main.682e32fa.chunk.js"
   ]
 }
