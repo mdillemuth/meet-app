@@ -135,7 +135,7 @@ body {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(300px, 700px));
-  gap: 1em;
+  gap: 0.5em;
 }
 
 // Event Component
