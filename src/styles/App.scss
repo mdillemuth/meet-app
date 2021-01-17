@@ -8,8 +8,8 @@
 }
 
 // Variables
-$color-primary: #6663e8;
-$color-dark: #212121;
+$color-primary: #1f6f8b;
+$color-dark: #1c2b2d;
 $color-light: #ffffff;
 
 @font-face {
@@ -20,7 +20,7 @@ $color-light: #ffffff;
 // General Styles
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: $color-primary;
+  background-color: #eeeeee;
 
   ul {
     padding: 0;
@@ -33,13 +33,14 @@ body {
 
   h1 {
     margin-bottom: 0.25em;
-    color: $color-light;
+    color: $color-primary;
     letter-spacing: 1px;
     font-size: 2.5em;
   }
   h2 {
     opacity: 0.9;
-    color: $color-light;
+    font-weight: bold;
+    color: $color-primary;
     font-weight: normal;
     font-size: 1.1em;
   }
@@ -99,7 +100,6 @@ body {
     margin: 0;
     top: 54px;
     font-size: 14px;
-    // box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
   }
 
   .suggestions > li {
@@ -132,18 +132,14 @@ body {
 // EventList Component
 .EventList {
   width: 100%;
-
-  // background-color: #fff;
-  // padding: 1em;
-  // display: grid;
-  // justify-content: center;
-  // grid-template-columns: repeat(2, 1fr);
-  // gap: 1em;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 700px));
+  gap: 1em;
 }
 
 // Event Component
 .Event {
-  // max-width: 700px;
   background-color: $color-light;
   color: $color-dark;
   padding: 1em;
@@ -151,7 +147,7 @@ body {
   text-align: left;
   border-radius: 5px;
   position: relative;
-  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 3px 2px 2px 2px rgba(0, 0, 0, 0.075);
   opacity: 0.92;
 
   .summary {
