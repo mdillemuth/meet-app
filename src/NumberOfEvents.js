@@ -7,7 +7,7 @@ class NumberOfEvents extends Component {
     super();
     this.throttleHandleChange = debounce(
       this.throttleHandleChange.bind(this),
-      3000
+      1500
     );
     this.handleChange = this.handleChange.bind(this);
   }
