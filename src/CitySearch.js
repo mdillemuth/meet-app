@@ -21,8 +21,8 @@ class CitySearch extends Component {
   // Displays suggestions based on user input (autocomplete feature)
   handleChange = (event) => {
     const value = event.target.value;
-    this.setState({ showSuggestions: true})
-    
+    this.setState({ showSuggestions: true });
+
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
@@ -53,6 +53,7 @@ class CitySearch extends Component {
         >
           {suggestions.map((suggestion) => (
             <li
+              id={suggestion}
               key={suggestion}
               onClick={() => this.handleItemClicked(suggestion)}
             >
