@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import { getEvents } from './api';
+import { getEvents, extractLocations } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -21,8 +21,8 @@ class App extends Component {
     getEvents().then((response) => {
       if (this.mounted) {
         this.setState({
-          events: response.events,
-          locations: response.locations,
+          events: response.events.slice(0, this.state.numberOfEvents),
+          locations: extractLocations(response.events),
         });
       }
     });
@@ -51,7 +51,6 @@ class App extends Component {
           locations: response.locations,
         });
       });
-      // If user does not select a location, but chooses number of events
     } else {
       getEvents().then((response) => {
         // Persists location filter from state
