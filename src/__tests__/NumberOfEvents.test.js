@@ -16,9 +16,6 @@ describe('<NumberOfEvents /> component', () => {
     );
   });
 
-  // Interaction between App, NumberOfEvents, and EventList components
-  // Data from Mock API
-
   test('should specify 24 as value for events by default', () => {
     expect(NumberOfEventsWrapper.instance().props.numberOfEvents).toBe('24');
   });
@@ -40,5 +37,11 @@ describe('<NumberOfEvents /> component', () => {
     const eventObject = { target: { value: '10' } };
     instance.handleChange(eventObject);
     expect(instance.props.updateEvents.mock.calls[0][1]).toBe('10');
+  });
+
+  test('should change state when input changes', () => {
+    const eventObject = { target: { value: '10' } };
+    NumberOfEventsWrapper.find('.number').simulate('change', eventObject);
+    expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe('10');
   });
 });

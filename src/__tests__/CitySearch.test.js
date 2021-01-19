@@ -1,6 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import CitySearch from '../CitySearch';
+import App from '../App';
 import { mockData } from '../mock-data';
 import { extractLocations } from '../api';
 
@@ -77,7 +78,6 @@ describe('<CitySearch /> component', () => {
     expect(CitySearchWrapper.state('query')).toBe(suggestions[0]);
   });
 
-  // 4.4
   test('selecting CitySearch input reveals the suggestions list', () => {
     CitySearchWrapper.find('.city').simulate('focus');
     expect(CitySearchWrapper.state('showSuggestions')).toBe(true);
@@ -86,7 +86,6 @@ describe('<CitySearch /> component', () => {
     });
   });
 
-  // 4.4
   test('selecting a suggestion should hide the suggestions list', () => {
     CitySearchWrapper.setState({
       query: 'Berlin',
@@ -99,7 +98,6 @@ describe('<CitySearch /> component', () => {
     });
   });
 
-  // 4.4
   test('suggestions list will appear upon having a focus on city input field', () => {
     CitySearchWrapper.setState({
       query: '',
@@ -107,5 +105,16 @@ describe('<CitySearch /> component', () => {
     });
     CitySearchWrapper.find('.city').simulate('focus');
     expect(CitySearchWrapper.find('.suggestions').prop('style')).toEqual({});
+  });
+});
+
+describe('<CitySearch /> integration', () => {
+  test('should get list of events after user selects a city', () => {
+    const AppWrapper = mount(<App />);
+    AppWrapper.instance().updateEvents = jest.fn();
+    AppWrapper.instance().forceUpdate();
+    const CitySearchWrapper = AppWrapper.find(CitySearch);
+    CitySearchWrapper.instance().handleItemClicked('value');
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalled();
   });
 });
