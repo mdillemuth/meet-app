@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { debounce } from 'lodash';
 
 class NumberOfEvents extends Component {
+  constructor() {
+    super();
+    this.throttleHandleChange = debounce(
+      this.throttleHandleChange.bind(this),
+      500
+    );
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   state = {
     numberOfEvents: '24',
   };
 
+  throttleHandleChange(value) {
+    this.props.updateEvents(null, value);
+  }
+
   // When user changes number value
   handleChange = (event) => {
     const value = event.target.value;
-    this.props.updateEvents(null, value);
     this.setState({ numberOfEvents: value });
+    this.throttleHandleChange(value);
   };
 
   render() {

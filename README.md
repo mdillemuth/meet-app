@@ -73,7 +73,7 @@ Described in terms of user stories and scenarios
 
 - _Given_ the main page is open
 - _When_ the app is rendered
-- _Then_ the user should see a list of collapsed event elements for all cities
+- _Then_ the user should see a list of collapsed event elements
 
 #### Scenario 2: User can expand an event to see its details
 
@@ -83,7 +83,7 @@ Described in terms of user stories and scenarios
 
 #### Scenario 3: User can collapse an event to hide its details
 
-- _Given_ the user has clickend 'show details' on an event element
+- _Given_ the user has clicked 'show details' on an event element
 - _When_ the user clicks 'hide details' on the event element
 - _Then_ the event element will close and the user will see the list of collapsed event elements
 
@@ -93,17 +93,17 @@ Described in terms of user stories and scenarios
 
 - As a _user_, I would like to be able to _specify the number of events I want to view in the app_ so that I can _see more or fewer events in the events list at once_
 
-#### Scenario 1: When user hasn't specified a number, 32 is the default number
+#### Scenario 1: When user hasn't specified a number, 24 is the default number
 
 - _Given_ the main page is open
 - _When_ the app has rendered
-- _Then_ the app will display 32 as the number of events displayed by default
+- _Then_ the app will display 24 events
 
 #### Scenario 2: User can change the number of events they want to see
 
-- _Given_ the list of upcoming events are displayed
-- _When_ the user enters the input box for 'number of events'
-- _Then_ the user can change the number of events displayed on input
+- _Given_ the list of upcoming events is displayed
+- _When_ the user enters a number into the 'number of events' input box
+- _Then_ the user will see the number of events they specified
 
 ### 4. Use The App When Offline
 
