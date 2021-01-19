@@ -1,6 +1,6 @@
 # Meet App
 
-![App Showcase Gif](/meet-app-4-3-showcase.gif)
+![App Showcase Gif](/meet-app-4-4-showcase.gif)
 
 ## Description
 
