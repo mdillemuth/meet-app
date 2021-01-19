@@ -6,7 +6,7 @@ describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper, eventCount;
 
   beforeAll(() => {
-    const updateEvents = jest.fn(location, eventCount);
+    const updateEvents = jest.fn(eventCount);
     const numberOfEvents = '24';
     NumberOfEventsWrapper = shallow(
       <NumberOfEvents
@@ -15,6 +15,9 @@ describe('<NumberOfEvents /> component', () => {
       />
     );
   });
+
+  // Interaction between App, NumberOfEvents, and EventList components
+  // Data from Mock API
 
   test('should specify 24 as value for events by default', () => {
     expect(NumberOfEventsWrapper.instance().props.numberOfEvents).toBe('24');
@@ -27,7 +30,7 @@ describe('<NumberOfEvents /> component', () => {
   test('number input should render numEvents as its value correctly', () => {
     const numberOfEvents = NumberOfEventsWrapper.instance().props
       .numberOfEvents;
-    expect(NumberOfEventsWrapper.find('.number').prop('value')).toBe(
+    expect(NumberOfEventsWrapper.find('.number').prop('value')).toEqual(
       numberOfEvents
     );
   });

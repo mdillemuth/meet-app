@@ -9,7 +9,7 @@ const getEvents = async () => {
   // Return mockData for local user
   if (window.location.href.startsWith('http://localhost')) {
     NProgress.done();
-    return mockData;
+    return { events: mockData, locations: extractLocations(mockData)};
   }
 
   const token = await getAccessToken();
@@ -28,7 +28,7 @@ const getEvents = async () => {
       localStorage.setItem('locations', JSON.stringify(locations));
     }
     NProgress.done();
-    return result.data.events;
+    return { events: result.data.events, locations };
   }
 };
 
@@ -40,14 +40,12 @@ const extractLocations = (events) => {
 
 // *===== Authentication & Authorization Functions =====* //
 const getAccessToken = async () => {
-  // Looks for pre-existing token in storage
+  // Looks for pre-existing token in storage & check validity
   const accessToken = localStorage.getItem('access_token');
-
-  // If there is token, check if it is still valid
   const tokenCheck = accessToken && (await checkToken(accessToken));
 
   // If no token or invalid token, retrieve new token through google authorization
-  if (!accessToken || tokenCheck.error) {
+  if (!accessToken || !tokenCheck) {
     localStorage.removeItem('access_token'); // Remove invalid token
 
     // Look for authorization code
@@ -75,16 +73,15 @@ const checkToken = async (accessToken) => {
     .then((res) => res.json())
     .catch((error) => error.json());
 
-  return result;
+  return result.error ? false : true;
 };
 
 // Gets new token from AWS Lamba if there is no token or invalid token
 const getToken = async (code) => {
+  removeQuery();
   const encodeCode = encodeURIComponent(code);
   const { access_token } = await fetch(
-    'https://10b0ouiuy4.execute-api.us-east-1.amazonaws.com/dev/api/token' +
-      '/' +
-      encodeCode
+    `https://10b0ouiuy4.execute-api.us-east-1.amazonaws.com/dev/api/token/${encodeCode}`
   )
     .then((res) => {
       return res.json();

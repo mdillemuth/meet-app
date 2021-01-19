@@ -16,26 +16,19 @@ class CitySearch extends Component {
       showSuggestions: false,
     });
     this.props.updateEvents(suggestion);
-
-    // Resets events when user clicks 'show all cities'
-    // if (suggestion === 'all') {
-    //   this.setState({
-    //     query: '',
-    //   });
-    //   return this.props.updateEvents(suggestion);
-    // }
   };
 
   // Displays suggestions based on user input (autocomplete feature)
   handleChange = (event) => {
     const value = event.target.value;
+    this.setState({ showSuggestions: true})
+    
     const suggestions = this.props.locations.filter((location) => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     });
     this.setState({
       query: value,
       suggestions,
-      showSuggestions: true,
     });
   };
 
@@ -44,7 +37,7 @@ class CitySearch extends Component {
 
     return (
       <div className='CitySearch'>
-        <h2>Choose your nearest city</h2>
+        <label>Choose your nearest city</label>
         <input
           type='text'
           className='city'

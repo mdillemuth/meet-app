@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import { extractLocations, getEvents, checkToken, getToken } from './api';
+import { getEvents } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -15,21 +15,17 @@ class App extends Component {
   };
   // numberOfEvents uses a string to prevent type conversion
 
-  async componentDidMount() {
-    const accessToken = localStorage.getItem('access_token');
-    const validToken =
-      accessToken !== null ? await checkToken(accessToken) : false;
-
-    if (validToken) this.updateEvents();
-
+  componentDidMount() {
     this.mounted = true;
 
-    getEvents().then((events) => {
+    getEvents().then((response) => {
       if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
+        this.setState({
+          events: response.events,
+          locations: response.locations,
+        });
       }
     });
-    // this.updateEvents();
   }
 
   componentWillUnmount() {
@@ -49,16 +45,14 @@ class App extends Component {
             ? response.events
             : response.events.filter((event) => event.location === location);
         const events = locationEvents.slice(0, numberOfEvents);
-        const locations = response.locations;
         return this.setState({
-          events,
-          locations,
+          events: events,
           currentLocation: location,
+          locations: response.locations,
         });
       });
-    }
-    // If user does not select a location, but chooses number of events
-    else {
+      // If user does not select a location, but chooses number of events
+    } else {
       getEvents().then((response) => {
         // Persists location filter from state
         const locationEvents =
@@ -68,11 +62,10 @@ class App extends Component {
                 (event) => event.location === currentLocation
               );
         const events = locationEvents.slice(0, eventCount);
-        const locations = response.locations;
         return this.setState({
-          events,
-          locations,
+          events: events,
           numberOfEvents: eventCount,
+          locations: response.locations,
         });
       });
     }
