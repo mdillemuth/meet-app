@@ -72,6 +72,34 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
+  test('App passes `numberOfEvents` state as a prop to NumberOfEvents', () => {
+    const AppWrapper = mount(<App />);
+    const numberOfEvents = AppWrapper.state('numberOfEvents');
+    expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(
+      numberOfEvents
+    );
+    AppWrapper.unmount();
+  });
+
+  test('App receives state update for numberOfEvents when user changes number of events', async () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const eventObject = { target: { value: '10' } };
+    const instance = NumberOfEventsWrapper.instance();
+    await instance.handleChange(eventObject);
+    AppWrapper.instance().forceUpdate();
+    expect(AppWrapper.state('numberOfEvents')).toBe('10');
+    AppWrapper.unmount();
+  });
+
+  test('App receives state update for currentLocation when user selects location', async () => {
+    const AppWrapper = mount(<App />);
+    const CitySearchWrapper = AppWrapper.find(CitySearch);
+    await CitySearchWrapper.instance().handleItemClicked('Berlin');
+    expect(AppWrapper.state('currentLocation')).toBe('Berlin');
+    AppWrapper.unmount();
+  });
+
   test('get list of events matching the city selected by the user', async () => {
     const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);
@@ -95,17 +123,6 @@ describe('<App /> integration', () => {
     suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents.events);
-    AppWrapper.unmount();
-  });
-
-  test('App state update for numberOfEvents when user changes number of events', async () => {
-    const AppWrapper = mount(<App />);
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const eventObject = { target: { value: '10' } };
-    const instance = NumberOfEventsWrapper.instance();
-    await instance.handleChange(eventObject);
-    AppWrapper.instance().forceUpdate();
-    expect(AppWrapper.state('numberOfEvents')).toBe('10');
     AppWrapper.unmount();
   });
 });
