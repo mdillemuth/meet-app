@@ -32,13 +32,6 @@ describe('<NumberOfEvents /> component', () => {
     );
   });
 
-  test('should correctly pass input value to updateEvents as second argument (numberOfEvents)', () => {
-    const instance = NumberOfEventsWrapper.instance();
-    const eventObject = { target: { value: '10' } };
-    instance.handleChange(eventObject);
-    expect(instance.props.updateEvents.mock.calls[0][1]).toBe('10');
-  });
-
   test('should change state when input changes', () => {
     const eventObject = { target: { value: '10' } };
     NumberOfEventsWrapper.find('.number').simulate('change', eventObject);

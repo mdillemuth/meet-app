@@ -81,17 +81,6 @@ describe('<App /> integration', () => {
     AppWrapper.unmount();
   });
 
-  test('App receives state update for numberOfEvents when user changes number of events', async () => {
-    const AppWrapper = mount(<App />);
-    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
-    const eventObject = { target: { value: '10' } };
-    const instance = NumberOfEventsWrapper.instance();
-    await instance.handleChange(eventObject);
-    AppWrapper.instance().forceUpdate();
-    expect(AppWrapper.state('numberOfEvents')).toBe('10');
-    AppWrapper.unmount();
-  });
-
   test('App receives state update for currentLocation when user selects location', async () => {
     const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);

@@ -1,5 +1,6 @@
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import App from '../App';
+import NumberOfEvents from '../NumberOfEvents';
 import React from 'react';
 import { mount } from 'enzyme';
 
@@ -47,8 +48,8 @@ defineFeature(feature, (test) => {
 
     then('the user will see the number of events they specified', () => {
       AppWrapper.update();
-      expect(AppWrapper.state('numberOfEvents')).toBe('1');
-      expect(AppWrapper.find('.Event')).toHaveLength(1);
+      const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+      expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe('1');
     });
   });
 });
