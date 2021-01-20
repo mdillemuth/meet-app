@@ -56,6 +56,25 @@
         flex-direction: column;
         max-width: 500px;
       }
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .btn-container {
+        margin: 2em auto 0;
+        padding: 1em;
+        background-color: #1f6f8b;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        border: 1px solid #1f6f8b;
+        transition: 250ms;
+      }
+      .btn-container:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18),
+          0 4px 14px 1px rgba(0, 0, 0, 0.15);
+      }
     </style>
   </head>
   <body>
@@ -69,6 +88,9 @@
         stage and the calendar accessed is not a personal calendar, but one
         created specifically for the project.
       </p>
+      <a class="btn-container" href="http://mdillemuth.github.io/meet-app/"
+        >Return to Login</a
+      >
     </div>
   </body>
 </html>
