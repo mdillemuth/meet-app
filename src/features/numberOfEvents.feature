@@ -1,9 +1,9 @@
 Feature: Show/hide an event’s details
 
-Scenario: When the user hasn't specified a number, 24 is the default number
+Scenario: When the user hasn't specified a number, 10 is the default number
     Given the main page is open
     When the app is rendered
-    Then the app will display 24 events
+    Then the app will display 10 events
 
 Scenario: User can change the number of events they want to see
     Given the list of upcoming events is displayed

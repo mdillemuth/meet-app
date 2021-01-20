@@ -11,7 +11,7 @@ class App extends Component {
     events: [],
     locations: [],
     currentLocation: 'all',
-    numberOfEvents: '24',
+    numberOfEvents: '10',
   };
   // numberOfEvents uses a string to prevent type conversion
 

@@ -7,7 +7,7 @@ import { mount } from 'enzyme';
 const feature = loadFeature('./src/features/numberOfEvents.feature');
 
 defineFeature(feature, (test) => {
-  test("When the user hasn't specified a number, 24 is the default number", ({
+  test("When the user hasn't specified a number, 10 is the default number", ({
     given,
     when,
     then,
@@ -19,12 +19,12 @@ defineFeature(feature, (test) => {
       AppWrapper = mount(<App />);
     });
 
-    then('the app will display 24 events', () => {
+    then('the app will display 10 events', () => {
       AppWrapper.update();
       // We can only expect 2 events, which is the number of events in mockData
       expect(AppWrapper.find('.Event')).toHaveLength(2);
       // When online, the app will display the number of events in the App's state below
-      expect(AppWrapper.state('numberOfEvents')).toBe('24');
+      expect(AppWrapper.state('numberOfEvents')).toBe('10');
     });
   });
 

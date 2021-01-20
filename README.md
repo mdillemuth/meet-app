@@ -93,11 +93,11 @@ Described in terms of user stories and scenarios
 
 - As a _user_, I would like to be able to _specify the number of events I want to view in the app_ so that I can _see more or fewer events in the events list at once_
 
-#### Scenario 1: When user hasn't specified a number, 24 is the default number
+#### Scenario 1: When user hasn't specified a number, 10 is the default number
 
 - _Given_ the main page is open
 - _When_ the app has rendered
-- _Then_ the app will display 24 events
+- _Then_ the app will display 10 events
 
 #### Scenario 2: User can change the number of events they want to see
 

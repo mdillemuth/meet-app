@@ -13,7 +13,7 @@ class NumberOfEvents extends Component {
   }
 
   state = {
-    numberOfEvents: '24',
+    numberOfEvents: '10',
   };
 
   throttleHandleChange(value) {

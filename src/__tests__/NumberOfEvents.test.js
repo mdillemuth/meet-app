@@ -7,7 +7,7 @@ describe('<NumberOfEvents /> component', () => {
 
   beforeAll(() => {
     const updateEvents = jest.fn(eventCount);
-    const numberOfEvents = '24';
+    const numberOfEvents = '10';
     NumberOfEventsWrapper = shallow(
       <NumberOfEvents
         numberOfEvents={numberOfEvents}
@@ -16,8 +16,8 @@ describe('<NumberOfEvents /> component', () => {
     );
   });
 
-  test('should specify 24 as value for events by default', () => {
-    expect(NumberOfEventsWrapper.instance().props.numberOfEvents).toBe('24');
+  test('should specify 10 as value for events by default', () => {
+    expect(NumberOfEventsWrapper.instance().props.numberOfEvents).toBe('10');
   });
 
   test('should render text input', () => {
@@ -33,8 +33,8 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('should change state when input changes', () => {
-    const eventObject = { target: { value: '10' } };
+    const eventObject = { target: { value: '1' } };
     NumberOfEventsWrapper.find('.number').simulate('change', eventObject);
-    expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe('10');
+    expect(NumberOfEventsWrapper.state('numberOfEvents')).toBe('1');
   });
 });
