@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
+import { WarningAlert } from './Alert';
 import { getEvents, extractLocations } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
@@ -12,15 +13,18 @@ class App extends Component {
     locations: [],
     currentLocation: 'all',
     numberOfEvents: '10',
+    warningText: '',
   };
-  // numberOfEvents uses a string to prevent type conversion
+  // Note: numberOfEvents uses a string to prevent type conversion
 
   componentDidMount() {
     this.mounted = true;
+    this.setState({ warningText: 'Please wait, events are loading...' });
 
     getEvents().then((response) => {
       if (this.mounted) {
         this.setState({
+          warningText: '',
           events: response.events.slice(0, this.state.numberOfEvents),
           locations: extractLocations(response.events),
         });
@@ -36,6 +40,8 @@ class App extends Component {
   updateEvents = (location, eventCount) => {
     const { currentLocation, numberOfEvents } = this.state;
 
+    this.setState({ warningText: 'Please wait, events are loading...' });
+
     // If user selects a location from input
     if (location) {
       getEvents().then((response) => {
@@ -49,6 +55,7 @@ class App extends Component {
           events: events,
           currentLocation: location,
           locations: response.locations,
+          warningText: '',
         });
       });
     } else {
@@ -65,13 +72,14 @@ class App extends Component {
           events: events,
           numberOfEvents: eventCount,
           locations: response.locations,
+          warningText: '',
         });
       });
     }
   };
 
   render() {
-    const { numberOfEvents, events, locations } = this.state;
+    const { numberOfEvents, events, locations, warningText } = this.state;
 
     return (
       <div className='App'>
@@ -81,6 +89,7 @@ class App extends Component {
           numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
+        <WarningAlert text={warningText} />
         <EventList events={events} />
       </div>
     );
