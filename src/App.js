@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
+import Login from './Login';
 import { WarningAlert } from './Alert';
-import { getEvents, extractLocations } from './api';
+import { getEvents, extractLocations, checkToken } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -14,22 +15,34 @@ class App extends Component {
     currentLocation: 'all',
     numberOfEvents: '10',
     warningText: '',
+    tokenCheck: false,
   };
   // Note: numberOfEvents uses a string to prevent type conversion
 
-  componentDidMount() {
-    this.mounted = true;
-    this.setState({ warningText: 'Please wait, events are loading...' });
+  async componentDidMount() {
+    const accessToken = localStorage.getItem('access_token');
+    const validToken =
+      accessToken !== null ? await checkToken(accessToken) : false;
+    this.setState({ tokenCheck: validToken });
+    if (validToken) this.updateEvents();
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
 
-    getEvents().then((response) => {
-      if (this.mounted) {
-        this.setState({
-          warningText: '',
-          events: response.events.slice(0, this.state.numberOfEvents),
-          locations: extractLocations(response.events),
-        });
-      }
-    });
+    this.mounted = true;
+    if (code && this.mounted && !validToken) {
+      this.setState({ tokenCheck: true });
+      this.updateEvents();
+    }
+
+    // getEvents().then((response) => {
+    //   if (this.mounted) {
+    //     this.setState({
+    //       warningText: '',
+    //       events: response.events.slice(0, this.state.numberOfEvents),
+    //       locations: extractLocations(response.events),
+    //     });
+    //   }
+    // });
   }
 
   componentWillUnmount() {
@@ -79,9 +92,19 @@ class App extends Component {
   };
 
   render() {
-    const { numberOfEvents, events, locations, warningText } = this.state;
+    const {
+      numberOfEvents,
+      events,
+      locations,
+      warningText,
+      tokenCheck,
+    } = this.state;
 
-    return (
+    return !tokenCheck ? (
+      <div className='App'>
+        <Login />
+      </div>
+    ) : (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
