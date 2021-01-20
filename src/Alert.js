@@ -31,14 +31,14 @@ class InfoAlert extends Alert {
 class WarningAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'orange';
+    this.color = '#FFA500';
   }
 }
 
 class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'red';
+    this.color = '#ec0101';
   }
 }
 

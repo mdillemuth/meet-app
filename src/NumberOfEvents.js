@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
+import { ErrorAlert } from './Alert';
 
 class NumberOfEvents extends Component {
+  // For debounce function
   constructor() {
     super();
     this.throttleHandleChange = debounce(
@@ -14,6 +16,7 @@ class NumberOfEvents extends Component {
 
   state = {
     numberOfEvents: '10',
+    errorText: '',
   };
 
   throttleHandleChange(value) {
@@ -23,12 +26,24 @@ class NumberOfEvents extends Component {
   // When user changes number value
   handleChange = (event) => {
     const value = event.target.value;
-    this.setState({ numberOfEvents: value });
-    this.throttleHandleChange(value);
+
+    if (value < 0) {
+      this.setState({
+        errorText: 'Please enter a positive number of events',
+      });
+    } else if (value < 1) {
+      this.setState({
+        numberOfEvents: value,
+        errorText: 'Please specify at least 1 event to be displayed',
+      });
+    } else {
+      this.setState({ errorText: '', numberOfEvents: value });
+      this.throttleHandleChange(value);
+    }
   };
 
   render() {
-    const { numberOfEvents } = this.state;
+    const { numberOfEvents, errorText } = this.state;
     return (
       <div className='NumberOfEvents'>
         <label>Number of events</label>
@@ -38,6 +53,7 @@ class NumberOfEvents extends Component {
           value={numberOfEvents}
           onChange={this.handleChange}
         />
+        <ErrorAlert text={errorText} />
       </div>
     );
   }
