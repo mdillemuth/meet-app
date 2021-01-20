@@ -17,7 +17,7 @@ oogle_%22G%22_Logo.svg'
             />
           </div>
           <a
-            href='https://10b0ouiuy4.execute-api.us-east-1.amazonaws.com/dev/api/get-auth-url'
+            href='https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly&response_type=code&client_id=56115638320-9bl5o1guq2jvp29bfpitj1cfflfcvoc3.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fmdillemuth.github.io%2Fmeet-app%2F'
             rel='nofollow noopener'
             class='btn-text'
           >

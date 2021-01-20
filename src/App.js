@@ -4,7 +4,7 @@ import CitySearch from './CitySearch';
 import EventList from './EventList';
 import Login from './Login';
 import { WarningAlert } from './Alert';
-import { getEvents, extractLocations, checkToken } from './api';
+import { getEvents, checkToken } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -33,16 +33,6 @@ class App extends Component {
       this.setState({ tokenCheck: true });
       this.updateEvents();
     }
-
-    // getEvents().then((response) => {
-    //   if (this.mounted) {
-    //     this.setState({
-    //       warningText: '',
-    //       events: response.events.slice(0, this.state.numberOfEvents),
-    //       locations: extractLocations(response.events),
-    //     });
-    //   }
-    // });
   }
 
   componentWillUnmount() {
@@ -80,7 +70,8 @@ class App extends Component {
             : response.events.filter(
                 (event) => event.location === currentLocation
               );
-        const events = locationEvents.slice(0, eventCount);
+        const numEvents = eventCount || numberOfEvents;
+        const events = locationEvents.slice(0, numEvents);
         return this.setState({
           events: events,
           numberOfEvents: eventCount,
