@@ -26,11 +26,11 @@ oogle_%22G%22_Logo.svg'
         </div>
       </div>
       <a
-        class='privacy-btn'
+        class='privacy'
         href='https://mdillemuth.github.io/meet-app/privacy.html'
         rel='nofollow noopener'
       >
-        Privacy policy
+        View privacy policy
       </a>
     </div>
   );
