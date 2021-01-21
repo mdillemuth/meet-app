@@ -1,13 +1,15 @@
 {
   "files": {
     "main.css": "/meet-app/static/css/main.474c37e2.chunk.css",
-    "main.js": "/meet-app/static/js/main.8c3c29ad.chunk.js",
-    "main.js.map": "/meet-app/static/js/main.8c3c29ad.chunk.js.map",
+    "main.js": "/meet-app/static/js/main.7a832c81.chunk.js",
+    "main.js.map": "/meet-app/static/js/main.7a832c81.chunk.js.map",
     "runtime-main.js": "/meet-app/static/js/runtime-main.60c79d87.js",
     "runtime-main.js.map": "/meet-app/static/js/runtime-main.60c79d87.js.map",
     "static/js/2.282eedb6.chunk.js": "/meet-app/static/js/2.282eedb6.chunk.js",
     "static/js/2.282eedb6.chunk.js.map": "/meet-app/static/js/2.282eedb6.chunk.js.map",
     "index.html": "/meet-app/index.html",
+    "service-worker.js": "/meet-app/service-worker.js",
+    "service-worker.js.map": "/meet-app/service-worker.js.map",
     "static/css/main.474c37e2.chunk.css.map": "/meet-app/static/css/main.474c37e2.chunk.css.map",
     "static/js/2.282eedb6.chunk.js.LICENSE.txt": "/meet-app/static/js/2.282eedb6.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/meet-app/static/media/Roboto-Regular.03523cf5.ttf"
@@ -16,6 +18,6 @@
     "static/js/runtime-main.60c79d87.js",
     "static/js/2.282eedb6.chunk.js",
     "static/css/main.474c37e2.chunk.css",
-    "static/js/main.8c3c29ad.chunk.js"
+    "static/js/main.7a832c81.chunk.js"
   ]
 }
