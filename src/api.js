@@ -11,10 +11,18 @@ const getEvents = async () => {
     NProgress.done();
     return { events: mockData, locations: extractLocations(mockData) };
   }
-
-  const token = await getAccessToken();
+  // Returns previously cached data for offline user
+  if (!navigator.onLine) {
+    const events = localStorage.getItem('lastEvents');
+    NProgress.done();
+    return {
+      events: JSON.parse(events).events,
+      locations: extractLocations(JSON.parse(events).events),
+    };
+  }
 
   // Calls API to retrieve events data
+  const token = await getAccessToken();
   if (token) {
     removeQuery();
     const url =
