@@ -94,12 +94,12 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Meet App</h1>
-        <ErrorAlert text={errorText} />
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents
           numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
+        <ErrorAlert text={errorText} />
         <WarningAlert text={warningText} />
         <EventList events={events} />
       </div>
