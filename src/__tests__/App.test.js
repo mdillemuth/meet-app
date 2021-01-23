@@ -6,6 +6,7 @@ import App from '../App';
 import NumberOfEvents from '../NumberOfEvents';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import { WarningAlert } from '../Alert';
 
 // Unit Tests
 describe('<App /> component', () => {
@@ -26,9 +27,8 @@ describe('<App /> component', () => {
     expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
   });
 
-  test('should render all events by default', () => {
-    const numTotalEvents = mockData.length;
-    expect(AppWrapper.state().events.length).toEqual(numTotalEvents);
+  test('should render WarningAlert component', () => {
+    expect(AppWrapper.find(WarningAlert)).toHaveLength(1);
   });
 });
 

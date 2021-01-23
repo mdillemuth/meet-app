@@ -60,8 +60,8 @@ class NumberOfEvents extends Component {
 }
 
 NumberOfEvents.propTypes = {
-  numberOfEvents: PropTypes.string.isRequired,
-  updateEvents: PropTypes.func.isRequired,
+  numberOfEvents: PropTypes.string,
+  updateEvents: PropTypes.func,
 };
 
 export default NumberOfEvents;

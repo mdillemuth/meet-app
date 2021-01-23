@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NumberOfEvents from '../NumberOfEvents';
+import { ErrorAlert } from '../Alert';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper, eventCount;
@@ -18,6 +19,10 @@ describe('<NumberOfEvents /> component', () => {
 
   test('should specify 10 as value for events by default', () => {
     expect(NumberOfEventsWrapper.instance().props.numberOfEvents).toBe('10');
+  });
+
+  test('should render ErrorAlert', () => {
+    expect(NumberOfEventsWrapper.find(ErrorAlert)).toHaveLength(1);
   });
 
   test('should render text input', () => {

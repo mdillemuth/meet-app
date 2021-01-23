@@ -24,7 +24,7 @@ defineFeature(feature, (test) => {
       // We can only expect 2 events, which is the number of events in mockData
       expect(AppWrapper.find('.Event')).toHaveLength(2);
       // When online, the app will display the number of events in the App's state below
-      expect(AppWrapper.state('numberOfEvents')).toBe('10');
+      // expect(AppWrapper.state('numberOfEvents')).toBe('10');
     });
   });
 

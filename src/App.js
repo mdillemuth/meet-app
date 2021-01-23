@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import Login from './Login';
 import { WarningAlert } from './Alert';
-import { getEvents, checkToken } from './api';
+import { getEvents } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
@@ -15,22 +14,20 @@ class App extends Component {
     currentLocation: 'all',
     numberOfEvents: '10',
     warningText: '',
-    tokenCheck: false,
   };
   // Note: numberOfEvents uses a string to prevent type conversion
 
   async componentDidMount() {
-    const accessToken = localStorage.getItem('access_token');
-    const validToken =
-      accessToken !== null ? await checkToken(accessToken) : false;
-    this.setState({ tokenCheck: validToken });
-    if (validToken) this.updateEvents();
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
-
     this.mounted = true;
-    if (code && this.mounted && !validToken) {
-      this.setState({ tokenCheck: true });
+    if (!navigator.onLine) {
+      this.setState({
+        warningText:
+          'You are currently using the app offline and viewing data from your last visit. Data will not be up-to-date.',
+      });
+    } else {
+      this.setState({ warningText: '' });
+    }
+    if (this.mounted) {
       this.updateEvents();
     }
   }
@@ -72,30 +69,22 @@ class App extends Component {
               );
         const numEvents = eventCount || numberOfEvents;
         const events = locationEvents.slice(0, numEvents);
-        return this.setState({
-          events: events,
-          numberOfEvents: eventCount,
-          locations: response.locations,
-          warningText: '',
-        });
+        if (this.mounted) {
+          return this.setState({
+            events: events,
+            numberOfEvents: eventCount,
+            locations: response.locations,
+            warningText: '',
+          });
+        }
       });
     }
   };
 
   render() {
-    const {
-      numberOfEvents,
-      events,
-      locations,
-      warningText,
-      tokenCheck,
-    } = this.state;
+    const { numberOfEvents, events, locations, warningText } = this.state;
 
-    return !tokenCheck ? (
-      <div className='App'>
-        <Login />
-      </div>
-    ) : (
+    return (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />

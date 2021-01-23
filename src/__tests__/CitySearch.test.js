@@ -4,6 +4,7 @@ import CitySearch from '../CitySearch';
 import App from '../App';
 import { mockData } from '../mock-data';
 import { extractLocations } from '../api';
+import { InfoAlert } from '../Alert';
 
 describe('<CitySearch /> component', () => {
   let locations, CitySearchWrapper, updateEvents;
@@ -17,6 +18,10 @@ describe('<CitySearch /> component', () => {
 
   test('should render text input', () => {
     expect(CitySearchWrapper.find('.city')).toHaveLength(1);
+  });
+
+  test('should render infoAlert', () => {
+    expect(CitySearchWrapper.find(InfoAlert)).toHaveLength(1);
   });
 
   test('should hide list of suggestions by default', () => {
