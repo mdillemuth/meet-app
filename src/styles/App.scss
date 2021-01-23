@@ -137,21 +137,51 @@ body {
 }
 
 // DataVisualization Component
-.DataVisualization {
+.recharts-wrapper tspan {
+  font-size: 12px;
+}
+
+.data-vis-wrapper {
   position: relative;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
-  align-content: center;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin-bottom: 1em;
 
-  .data-pie-chart {
-    position: relative;
-    width: 300px;
+  h4 {
+    font-size: 16px;
+    color: $color-primary;
+    text-align: center;
   }
-  .data-scatter-plot {
-    min-width: 300px;
-    max-width: 1000px;
-    width: 100%;
+
+  .data-pie-wrapper,
+  .data-scatter-wrapper {
+    margin: 1em;
+    position: relative;
+    height: 450px;
+    border-radius: 5px;
+  }
+
+  .data-pie-wrapper {
+    width: 380px;
+    justify-self: center;
+  }
+
+  .data-scatter-plot,
+  .data-pie-chart {
+    box-shadow: 3px 2px 2px 2px rgba(0, 0, 0, 0.075);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -302,8 +332,8 @@ body {
   color: $color-primary;
 }
 
-@media all and (max-width: 1100px) {
-  .DataVisualization {
-    flex-direction: column;
+@media all and (min-width: 1100px) {
+  .data-vis-wrapper {
+    grid-template-columns: 1fr 3fr;
   }
 }

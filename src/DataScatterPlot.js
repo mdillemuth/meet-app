@@ -13,8 +13,7 @@ import {
 const DataScatterPlot = ({ data }) => {
   return (
     <div className='data-scatter-plot'>
-      <h4>Events in each city</h4>
-      <ResponsiveContainer width='90%' height={400}>
+      <ResponsiveContainer width='99%' height={400}>
         <ScatterChart
           margin={{
             top: 20,
