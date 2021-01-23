@@ -5,7 +5,7 @@ import { Pie, PieChart, ResponsiveContainer } from 'recharts';
 const DataPieChart = ({ data }) => {
   return (
     <div className='data-pie-chart'>
-      <ResponsiveContainer width='100%' height={400}>
+      <ResponsiveContainer width='99%' height={400}>
         <PieChart width={400} height={400}>
           <Pie
             data={data}
@@ -13,7 +13,7 @@ const DataPieChart = ({ data }) => {
             cy={200}
             labelLine={false}
             outerRadius={80}
-            fill='#8884d8'
+            fill='#1f6f8b'
             dataKey='value'
             label={({ name, percent }) =>
               `${name} ${(percent * 100).toFixed(0)}%`

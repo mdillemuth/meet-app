@@ -14,7 +14,7 @@ const DataScatterPlot = ({ data }) => {
   return (
     <div className='data-scatter-plot'>
       <h4>Events in each city</h4>
-      <ResponsiveContainer width='100%' height={400}>
+      <ResponsiveContainer width='99%' height={400}>
         <ScatterChart
           margin={{
             top: 20,
@@ -35,7 +35,7 @@ const DataScatterPlot = ({ data }) => {
             className='Data-tooltip'
             cursor={{ strokeDasharray: '3 3' }}
           />
-          <Scatter data={data} fill='#8884d8' />
+          <Scatter data={data} fill='#1f6f8b' />
         </ScatterChart>
       </ResponsiveContainer>
     </div>

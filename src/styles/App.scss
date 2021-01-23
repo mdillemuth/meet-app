@@ -137,20 +137,16 @@ body {
 }
 
 // DataVisualization Component
-// .DataVisualization {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
+.DataVisualization {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
 
-//   .data-pie-chart {
-//     max-width: 25%;
-//   }
-
-//   .data-scatter-plot {
-//     max-width: 75%;
-//   }
-// }
+  .data-pie-chart,
+  .data-scatter-plot {
+    min-width: 300px;
+  }
+}
 
 // EventList Component
 .EventList {
