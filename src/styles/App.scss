@@ -137,9 +137,6 @@ body {
 }
 
 // DataVisualization Component
-.recharts-wrapper tspan {
-  font-size: 12px;
-}
 
 .data-vis-wrapper {
   position: relative;
@@ -156,10 +153,6 @@ body {
     text-align: center;
   }
 
-  .data-scatter-wrapper {
-    display: none;
-  }
-
   .data-pie-wrapper,
   .data-scatter-wrapper {
     position: relative;
@@ -167,9 +160,21 @@ body {
     border-radius: 5px;
   }
 
+  .data-scatter-wrapper {
+    display: none;
+
+    .recharts-wrapper tspan {
+      font-size: 11px;
+    }
+  }
+
   .data-pie-wrapper {
     width: 380px;
     justify-self: center;
+
+    .recharts-wrapper tspan {
+      font-size: 12px;
+    }
   }
 
   .data-scatter-plot,
