@@ -1,42 +1,50 @@
-import React from 'react';
-import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
+import React, { useState, useEffect } from 'react';
+import DataScatterPlot from './DataScatterPlot';
+import DataPieChart from './DataPieChart';
 
-const DataVisualization = ({ data }) => {
+const DataVisualization = ({ events, locations }) => {
+  const [pieData, setPieData] = useState([]);
+
+  useEffect(() => {
+    // Gets frequency of event genres for pie chart
+    const getPieData = () => {
+      const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+      const summary = events.map((event) => {
+        const eventSummary = event.summary;
+        return { eventSummary };
+      });
+
+      const data = genres.map((genre) => {
+        const name = genre;
+
+        const value = summary.filter((summary) =>
+          summary.eventSummary.split(' ').includes(name)
+        ).length;
+        // Filter name and genre again here
+        return { name, value };
+      });
+
+      return data.filter((data) => data.value >= 1);
+    };
+
+    setPieData(() => getPieData());
+  }, [events]);
+
+  // Gets total number of events happening in each city for scatter plot
+  const getScatterData = () => {
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location)
+        .length;
+      const city = location.split(' ').shift();
+      return { city, number };
+    });
+    return data;
+  };
+
   return (
     <div className='DataVisualization'>
-      <h4>Events in each city</h4>
-      <ResponsiveContainer height={400}>
-        <ScatterChart
-          margin={{
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 20,
-          }}
-        >
-          <CartesianGrid />
-          <XAxis type='category' dataKey='city' name='city' />
-          <YAxis
-            allowDecimals={false}
-            type='number'
-            dataKey='number'
-            name='number of events'
-          />
-          <Tooltip
-            className='Data-tooltip'
-            cursor={{ strokeDasharray: '3 3' }}
-          />
-          <Scatter data={data} fill='#8884d8' />
-        </ScatterChart>
-      </ResponsiveContainer>
+      <DataPieChart data={pieData} />
+      <DataScatterPlot data={getScatterData()} />
     </div>
   );
 };

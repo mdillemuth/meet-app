@@ -5,12 +5,7 @@ import * as atatus from 'atatus-spa';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 // import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));
 
 atatus.config('b206faf0f0394dfcac9e7e53568bc5e8').install();
 

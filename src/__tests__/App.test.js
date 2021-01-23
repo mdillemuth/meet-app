@@ -6,8 +6,8 @@ import App from '../App';
 import NumberOfEvents from '../NumberOfEvents';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
-import DataVisualization from '../DataVisualization';
 import { WarningAlert, ErrorAlert } from '../Alert';
+import DataVisualization from '../DataVisualization';
 
 // Unit Tests
 describe('<App /> component', () => {
