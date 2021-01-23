@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
-import { WarningAlert } from './Alert';
+import { WarningAlert, ErrorAlert } from './Alert';
 import { getEvents } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
@@ -14,6 +14,7 @@ class App extends Component {
     currentLocation: 'all',
     numberOfEvents: '10',
     warningText: '',
+    errorText: '',
   };
   // Note: numberOfEvents uses a string to prevent type conversion
 
@@ -21,11 +22,11 @@ class App extends Component {
     this.mounted = true;
     if (!navigator.onLine) {
       this.setState({
-        warningText:
+        errorText:
           'You are currently using the app offline and viewing data from your last visit. Data will not be up-to-date.',
       });
     } else {
-      this.setState({ warningText: '' });
+      this.setState({ errorText: '' });
     }
     if (this.mounted) {
       this.updateEvents();
@@ -82,11 +83,18 @@ class App extends Component {
   };
 
   render() {
-    const { numberOfEvents, events, locations, warningText } = this.state;
+    const {
+      numberOfEvents,
+      events,
+      locations,
+      warningText,
+      errorText,
+    } = this.state;
 
     return (
       <div className='App'>
         <h1>Meet App</h1>
+        <ErrorAlert text={errorText} />
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
         <NumberOfEvents
           numberOfEvents={numberOfEvents}

@@ -6,7 +6,7 @@ import App from '../App';
 import NumberOfEvents from '../NumberOfEvents';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
-import { WarningAlert } from '../Alert';
+import { WarningAlert, ErrorAlert } from '../Alert';
 
 // Unit Tests
 describe('<App /> component', () => {
@@ -29,6 +29,10 @@ describe('<App /> component', () => {
 
   test('should render WarningAlert component', () => {
     expect(AppWrapper.find(WarningAlert)).toHaveLength(1);
+  });
+
+  test('should render ErrorAlert component', () => {
+    expect(AppWrapper.find(ErrorAlert)).toHaveLength(1);
   });
 });
 
