@@ -6,6 +6,7 @@ import App from '../App';
 import NumberOfEvents from '../NumberOfEvents';
 import EventList from '../EventList';
 import CitySearch from '../CitySearch';
+import DataVisualization from '../DataVisualization';
 import { WarningAlert, ErrorAlert } from '../Alert';
 
 // Unit Tests
@@ -33,6 +34,10 @@ describe('<App /> component', () => {
 
   test('should render ErrorAlert component', () => {
     expect(AppWrapper.find(ErrorAlert)).toHaveLength(1);
+  });
+
+  test('should render DataVisualization component', () => {
+    expect(AppWrapper.find(DataVisualization)).toHaveLength(1);
   });
 });
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
+import DataVisualization from './DataVisualization';
 import { WarningAlert, ErrorAlert } from './Alert';
 import { getEvents } from './api';
 import './styles/App.scss';
@@ -17,7 +18,6 @@ class App extends Component {
     errorText: '',
   };
   // Note: numberOfEvents uses a string to prevent type conversion
-
   async componentDidMount() {
     this.mounted = true;
     if (!navigator.onLine) {
@@ -82,6 +82,18 @@ class App extends Component {
     }
   };
 
+  // Gets total number of events happening in each city
+  getData = () => {
+    const { locations, events } = this.state;
+    const data = locations.map((location) => {
+      const number = events.filter((event) => event.location === location)
+        .length;
+      const city = location.split(' ').shift();
+      return { city, number };
+    });
+    return data;
+  };
+
   render() {
     const {
       numberOfEvents,
@@ -101,6 +113,7 @@ class App extends Component {
         />
         <ErrorAlert text={errorText} />
         <WarningAlert text={warningText} />
+        <DataVisualization data={this.getData()} />
         <EventList events={events} />
       </div>
     );

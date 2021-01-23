@@ -16,6 +16,7 @@
     "react": "^16.4.0-0",
     "react-dom": "^16.4.0-0",
     "react-scripts": "4.0.1",
+    "recharts": "^2.0.3",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^6.0.2",
     "workbox-broadcast-update": "^6.0.2",
@@ -67,7 +68,9 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/index.js",
       "<rootDir>/src/reportWebVitals.js",
-      "<rootDir>/src/api.js"
+      "<rootDir>/src/api.js",
+      "<rootDir>/src/service-worker.js",
+      "<rootDir>/src/serviceWorkerRegistration.js"
     ]
   }
 }
