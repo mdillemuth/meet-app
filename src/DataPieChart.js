@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Pie, PieChart, ResponsiveContainer, Cell } from 'recharts';
 
 const DataPieChart = ({ data }) => {
+  const colors = ['#00b8a9', '#ff9a00', '#f6416c', '#17b978', '#6639a6'];
+
   return (
     <div className='data-pie-chart'>
       <ResponsiveContainer width='100%' height={300}>
@@ -17,7 +19,15 @@ const DataPieChart = ({ data }) => {
             label={({ name, percent }) =>
               `${name} ${(percent * 100).toFixed(0)}%`
             }
-          />
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={colors[index % colors.length]}
+                name={entry.name}
+              />
+            ))}
+          </Pie>
         </PieChart>
       </ResponsiveContainer>
     </div>

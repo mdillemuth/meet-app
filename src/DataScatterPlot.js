@@ -16,10 +16,10 @@ const DataScatterPlot = ({ data }) => {
       <ResponsiveContainer width='99%' height={400}>
         <ScatterChart
           margin={{
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 20,
+            top: 8,
+            right: 8,
+            bottom: 8,
+            left: 8,
           }}
         >
           <CartesianGrid />
