@@ -5,6 +5,7 @@ import { extractLocations, getEvents } from '../api';
 import App from '../App';
 import NumberOfEvents from '../NumberOfEvents';
 import EventList from '../EventList';
+import Event from '../Event';
 import CitySearch from '../CitySearch';
 import { WarningAlert, ErrorAlert } from '../Alert';
 import DataVisualization from '../DataVisualization';
@@ -80,6 +81,16 @@ describe('<App /> integration', () => {
     );
     AppWrapper.unmount();
   });
+
+  test('App should load default number of events when launched', async () => {
+    const AppWrapper = mount(<App />);
+    const expectedNumEvents = mockData.length;
+    const { events }= await getEvents();
+    AppWrapper.setState({ events });
+    expect(AppWrapper.find(Event)).toHaveLength(expectedNumEvents);
+    AppWrapper.unmount();
+  })
+  
 
   test('App passes `numberOfEvents` state as a prop to NumberOfEvents', () => {
     const AppWrapper = mount(<App />);
