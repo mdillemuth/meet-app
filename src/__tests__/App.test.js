@@ -7,7 +7,7 @@ import NumberOfEvents from '../NumberOfEvents';
 import EventList from '../EventList';
 import Event from '../Event';
 import CitySearch from '../CitySearch';
-import { WarningAlert, ErrorAlert } from '../Alert';
+import { WarningAlert } from '../Alert';
 import DataVisualization from '../DataVisualization';
 
 // Unit Tests
@@ -31,10 +31,6 @@ describe('<App /> component', () => {
 
   test('should render WarningAlert component', () => {
     expect(AppWrapper.find(WarningAlert)).toHaveLength(1);
-  });
-
-  test('should render ErrorAlert component', () => {
-    expect(AppWrapper.find(ErrorAlert)).toHaveLength(1);
   });
 
   test('should render DataVisualization component', () => {
@@ -85,12 +81,11 @@ describe('<App /> integration', () => {
   test('App should load default number of events when launched', async () => {
     const AppWrapper = mount(<App />);
     const expectedNumEvents = mockData.length;
-    const { events }= await getEvents();
+    const { events } = await getEvents();
     AppWrapper.setState({ events });
     expect(AppWrapper.find(Event)).toHaveLength(expectedNumEvents);
     AppWrapper.unmount();
-  })
-  
+  });
 
   test('App passes `numberOfEvents` state as a prop to NumberOfEvents', () => {
     const AppWrapper = mount(<App />);

@@ -3,7 +3,8 @@ import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
 import DataVisualization from './DataVisualization';
-import { WarningAlert, ErrorAlert } from './Alert';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
+import { WarningAlert } from './Alert';
 import { getEvents } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
@@ -15,18 +16,17 @@ class App extends Component {
     currentLocation: 'all',
     numberOfEvents: '10',
     warningText: '',
-    errorText: '',
   };
 
   async componentDidMount() {
     this.mounted = true;
     if (!navigator.onLine) {
       this.setState({
-        errorText:
+        warningText:
           'You are currently using the app offline and viewing data from your last visit. Data will not be up-to-date.',
       });
     } else {
-      this.setState({ errorText: '' });
+      this.setState({ warningText: '' });
     }
     if (this.mounted) {
       this.updateEvents();
@@ -41,8 +41,6 @@ class App extends Component {
   updateEvents = (location, eventCount) => {
     const { currentLocation, numberOfEvents } = this.state;
 
-    this.setState({ warningText: 'Please wait, events are loading...' });
-
     // If user selects a location from input
     if (location) {
       getEvents().then((response) => {
@@ -56,7 +54,6 @@ class App extends Component {
           events: events,
           currentLocation: location,
           locations: response.locations,
-          warningText: '',
         });
       });
     } else {
@@ -75,21 +72,28 @@ class App extends Component {
             events: events,
             numberOfEvents: eventCount,
             locations: response.locations,
-            warningText: '',
           });
         }
       });
     }
   };
 
+  // Renders loading spinner while data is being rendered
+  renderData = () => {
+    const { events, locations } = this.state;
+
+    return events ? (
+      <div>
+        <DataVisualization events={events} locations={locations} />
+        <EventList events={events} />
+      </div>
+    ) : (
+      <LoadingSpinner />
+    );
+  };
+
   render() {
-    const {
-      numberOfEvents,
-      events,
-      locations,
-      warningText,
-      errorText,
-    } = this.state;
+    const { numberOfEvents, locations, warningText, errorText } = this.state;
 
     return (
       <div className='App'>
@@ -99,10 +103,8 @@ class App extends Component {
           numberOfEvents={numberOfEvents}
           updateEvents={this.updateEvents}
         />
-        <ErrorAlert text={errorText} />
         <WarningAlert text={warningText} />
-        <DataVisualization events={events} locations={locations} />
-        <EventList events={events} />
+        {this.renderData()}
       </div>
     );
   }
