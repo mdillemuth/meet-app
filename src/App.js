@@ -16,6 +16,7 @@ class App extends Component {
     currentLocation: 'all',
     numberOfEvents: '10',
     warningText: '',
+    isLoading: false,
   };
 
   async componentDidMount() {
@@ -39,8 +40,10 @@ class App extends Component {
 
   // Filters events based on location and number given in user input
   updateEvents = (location, eventCount) => {
-    const { currentLocation, numberOfEvents } = this.state;
+    // Starts loading gif on data call
+    this.setState({ isLoading: true });
 
+    const { currentLocation, numberOfEvents } = this.state;
     // If user selects a location from input
     if (location) {
       getEvents().then((response) => {
@@ -54,6 +57,7 @@ class App extends Component {
           events: events,
           currentLocation: location,
           locations: response.locations,
+          isLoading: false,
         });
       });
     } else {
@@ -72,23 +76,24 @@ class App extends Component {
             events: events,
             numberOfEvents: eventCount,
             locations: response.locations,
+            isLoading: false,
           });
         }
       });
     }
   };
 
-  // Renders loading spinner while data is being rendered
+  // Renders loading spinner while live data is being rendered
   renderData = () => {
-    const { events, locations } = this.state;
+    const { events, locations, isLoading } = this.state;
 
-    return events.length < 0 ? (
+    return isLoading ? (
+      <LoadingSpinner />
+    ) : (
       <div>
         <DataVisualization events={events} locations={locations} />
         <EventList events={events} />
       </div>
-    ) : (
-      <LoadingSpinner />
     );
   };
 

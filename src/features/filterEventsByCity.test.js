@@ -90,8 +90,12 @@ defineFeature(feature, (test) => {
 
     and(
       'the user should receive a list of upcoming events in that city',
-      () => {
-        expect(AppWrapper.find('.Event')).toHaveLength(mockData.length);
+      async () => {
+        // Something with the loading spinner & renderData() is messing this up
+        expect(AppWrapper.find(Event)).toHaveLength(
+          mockData.filter((event) => event.location === 'Berlin, Germany')
+            .length
+        );
       }
     );
   });
