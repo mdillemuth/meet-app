@@ -82,7 +82,7 @@ class App extends Component {
   renderData = () => {
     const { events, locations } = this.state;
 
-    return events ? (
+    return events.length < 0 ? (
       <div>
         <DataVisualization events={events} locations={locations} />
         <EventList events={events} />
@@ -93,7 +93,7 @@ class App extends Component {
   };
 
   render() {
-    const { numberOfEvents, locations, warningText, errorText } = this.state;
+    const { numberOfEvents, locations, warningText } = this.state;
 
     return (
       <div className='App'>
