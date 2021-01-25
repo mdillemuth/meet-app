@@ -17,14 +17,13 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     when('the app is rendered', () => {
       AppWrapper = mount(<App />);
+      AppWrapper.setState({ tokenCheck: true });
     });
 
-    then('the app will display 10 events', () => {
-      AppWrapper.update();
+    then('the app will display 10 events', async () => {
+      await AppWrapper.update();
       // We can only expect 2 events, which is the number of events in mockData
-      expect(AppWrapper.find('.Event')).toHaveLength(2);
-      // When online, the app will display the number of events in the App's state below
-      // expect(AppWrapper.state('numberOfEvents')).toBe('10');
+      expect(AppWrapper.find(Event)).toHaveLength(2);
     });
   });
 
@@ -36,6 +35,7 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     given('the list of upcoming events is displayed', () => {
       AppWrapper = mount(<App />);
+      AppWrapper.setState({ tokenCheck: true });
     });
 
     when(

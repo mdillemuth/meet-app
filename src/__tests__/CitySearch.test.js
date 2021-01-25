@@ -116,6 +116,7 @@ describe('<CitySearch /> component', () => {
 describe('<CitySearch /> integration', () => {
   test('should get list of events after user selects a city', () => {
     const AppWrapper = mount(<App />);
+    AppWrapper.setState({ tokenCheck: true });
     AppWrapper.instance().updateEvents = jest.fn();
     AppWrapper.instance().forceUpdate();
     const CitySearchWrapper = AppWrapper.find(CitySearch);
