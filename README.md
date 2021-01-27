@@ -1,6 +1,6 @@
 # Meet App
 
-![App Showcase Gif](/meet-app-4-4-showcase.gif)
+![App Showcase Gif](/meet-app-final-showcase.gif)
 
 ## Description
 
@@ -24,13 +24,13 @@ npm install
 _By default the app will run a local server on port: 3000_
 
 ```bash
-npm start
+npm run start
 ```
 
 ### Running application tests
 
 ```bash
-npm test
+npm run test
 ```
 
 ---
