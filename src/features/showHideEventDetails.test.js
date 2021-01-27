@@ -1,6 +1,7 @@
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import App from '../App';
 import React from 'react';
+import Event from '../Event';
 import { mockData } from '../mock-data';
 import { mount } from 'enzyme';
 
@@ -30,7 +31,7 @@ defineFeature(feature, (test) => {
     given('the list of upcoming events is displayed', async () => {
       AppWrapper = await mount(<App />);
       await AppWrapper.update();
-      expect(AppWrapper.find('.Event')).toHaveLength(mockData.length);
+      expect(AppWrapper.find(Event)).toHaveLength(mockData.length);
     });
 
     when('the user clicks `show details` button on the event element', () => {

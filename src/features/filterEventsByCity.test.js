@@ -5,6 +5,7 @@ import { extractLocations } from '../api';
 import { mockData } from '../mock-data';
 import App from '../App';
 import CitySearch from '../CitySearch';
+import Event from '../Event';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 const locations = extractLocations(mockData);
@@ -24,7 +25,7 @@ defineFeature(feature, (test) => {
 
     then('the user should see the list of upcoming events.', () => {
       AppWrapper.update();
-      expect(AppWrapper.find('.Event')).toHaveLength(mockData.length);
+      expect(AppWrapper.find(Event)).toHaveLength(mockData.length);
     });
   });
 
@@ -91,7 +92,7 @@ defineFeature(feature, (test) => {
     and(
       'the user should receive a list of upcoming events in that city',
       async () => {
-        // Something with the loading spinner & renderData() is messing this up
+        AppWrapper.update();
         expect(AppWrapper.find(Event)).toHaveLength(
           mockData.filter((event) => event.location === 'Berlin, Germany')
             .length

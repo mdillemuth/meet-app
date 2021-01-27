@@ -1,5 +1,7 @@
 import React from 'react';
 
+// This was created for the Google verification process, it is not currently being used in the App
+
 function Home() {
   return (
     <div className='Home'>

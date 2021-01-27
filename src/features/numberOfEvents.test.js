@@ -1,8 +1,10 @@
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import App from '../App';
+import Event from '../Event';
 import NumberOfEvents from '../NumberOfEvents';
 import React from 'react';
 import { mount } from 'enzyme';
+import { mockData } from '../mock-data';
 
 const feature = loadFeature('./src/features/numberOfEvents.feature');
 
@@ -17,13 +19,11 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     when('the app is rendered', () => {
       AppWrapper = mount(<App />);
-      AppWrapper.setState({ tokenCheck: true });
     });
 
-    then('the app will display 10 events', async () => {
-      await AppWrapper.update();
-      // We can only expect 2 events, which is the number of events in mockData
-      expect(AppWrapper.find(Event)).toHaveLength(2);
+    then('the app will display 10 events', () => {
+      AppWrapper.update();
+      expect(AppWrapper.find(Event)).toHaveLength(mockData.length);
     });
   });
 
@@ -35,7 +35,6 @@ defineFeature(feature, (test) => {
     let AppWrapper;
     given('the list of upcoming events is displayed', () => {
       AppWrapper = mount(<App />);
-      AppWrapper.setState({ tokenCheck: true });
     });
 
     when(

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import Home from './Home';
 import NumberOfEvents from './NumberOfEvents';
 import CitySearch from './CitySearch';
 import EventList from './EventList';
 import DataVisualization from './DataVisualization';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { WarningAlert } from './Alert';
-import { checkToken, getEvents } from './api';
+import { getEvents } from './api';
 import './styles/App.scss';
 import './styles/nprogress.css';
 
 class App extends Component {
   state = {
-    tokenCheck: false,
     events: [],
     locations: [],
     currentLocation: 'all',
@@ -22,13 +20,6 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const accessToken = localStorage.getItem('access_token');
-    const validToken =
-      accessToken !== null ? await checkToken(accessToken) : false;
-    this.setState({ tokenCheck: validToken });
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
-
     this.mounted = true;
     if (!navigator.onLine) {
       this.setState({
@@ -39,8 +30,7 @@ class App extends Component {
       this.setState({ warningText: '' });
     }
 
-    if (code && this.mounted && !validToken) {
-      this.setState({ tokenCheck: true });
+    if (this.mounted) {
       this.updateEvents();
     }
   }
@@ -51,8 +41,7 @@ class App extends Component {
 
   // Filters events based on location and number given in user input
   updateEvents = (location, eventCount) => {
-    // Starts loading gif on data call
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true }); // Start loading gif
 
     const { currentLocation, numberOfEvents } = this.state;
     // If user selects a location from input
@@ -109,11 +98,9 @@ class App extends Component {
   };
 
   render() {
-    const { numberOfEvents, locations, warningText, tokenCheck } = this.state;
+    const { numberOfEvents, locations, warningText } = this.state;
 
-    return !tokenCheck ? (
-      <Home />
-    ) : (
+    return (
       <div className='App'>
         <h1>Meet App</h1>
         <CitySearch locations={locations} updateEvents={this.updateEvents} />
