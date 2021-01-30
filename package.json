@@ -70,7 +70,8 @@
       "<rootDir>/src/reportWebVitals.js",
       "<rootDir>/src/api.js",
       "<rootDir>/src/service-worker.js",
-      "<rootDir>/src/serviceWorkerRegistration.js"
+      "<rootDir>/src/serviceWorkerRegistration.js",
+      "<rootDir>/src/Home.js"
     ]
   }
 }
