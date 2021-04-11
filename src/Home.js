@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 // This was created for the Google verification process, it is not currently being used in the App
 
@@ -81,6 +81,6 @@ oogle_%22G%22_Logo.svg'
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default Home;
+export default Home

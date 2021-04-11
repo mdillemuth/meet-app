@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import {
   ScatterChart,
   Scatter,
@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from 'recharts';
+} from 'recharts'
 
 const DataScatterPlot = ({ data }) => {
   return (
@@ -38,11 +38,11 @@ const DataScatterPlot = ({ data }) => {
         </ScatterChart>
       </ResponsiveContainer>
     </div>
-  );
-};
+  )
+}
 
 DataScatterPlot.propTypes = {
   data: PropTypes.array.isRequired,
-};
+}
 
-export default DataScatterPlot;
+export default DataScatterPlot

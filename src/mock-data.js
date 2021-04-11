@@ -79,6 +79,6 @@ const mockData = [
       useDefault: true,
     },
   },
-];
+]
 
-export { mockData };
+export { mockData }

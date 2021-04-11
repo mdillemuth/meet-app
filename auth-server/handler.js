@@ -1,8 +1,8 @@
-const { google } = require('googleapis');
-const OAuth2 = google.auth.OAuth2;
-const calendar = google.calendar('v3');
+const { google } = require('googleapis')
+const OAuth2 = google.auth.OAuth2
+const calendar = google.calendar('v3')
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 const credentials = {
   client_id: process.env.CLIENT_ID,
@@ -14,20 +14,20 @@ const credentials = {
   auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
   redirect_uris: ['https://mdillemuth.github.io/meet-app/'],
   javascript_origins: ['https://mdillemuth.github.io', 'http://localhost:3000'],
-};
+}
 
-const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
+const { client_secret, client_id, redirect_uris, calendar_id } = credentials
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
   redirect_uris[0]
-);
+)
 
 module.exports.getAuthURL = async () => {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES,
-  });
+  })
 
   return {
     statusCode: 200,
@@ -37,15 +37,15 @@ module.exports.getAuthURL = async () => {
     body: JSON.stringify({
       authUrl: authUrl,
     }),
-  };
-};
+  }
+}
 
 module.exports.getAccessToken = async (event) => {
   // The values used to instantiate the OAuthClient are at the top of the file
-  const oAuth2Client = new OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new OAuth2(client_id, client_secret, redirect_uris[0])
 
   // Decode authorization code extracted from the URL query
-  const code = decodeURIComponent(`${event.pathParameters.code}`);
+  const code = decodeURIComponent(`${event.pathParameters.code}`)
 
   return new Promise((resolve, reject) => {
     /**
@@ -55,10 +55,10 @@ module.exports.getAccessToken = async (event) => {
 
     oAuth2Client.getToken(code, (err, token) => {
       if (err) {
-        return reject(err);
+        return reject(err)
       }
-      return resolve(token);
-    });
+      return resolve(token)
+    })
   })
     .then((token) => {
       // Respond with OAuth token
@@ -68,26 +68,26 @@ module.exports.getAccessToken = async (event) => {
           'Access-Control-Allow-Origin': '*',
         },
         body: JSON.stringify(token),
-      };
+      }
     })
     .catch((err) => {
       // Handle error
-      console.error(err);
+      console.error(err)
       return {
         statusCode: 500,
         body: JSON.stringify(err),
-      };
-    });
-};
+      }
+    })
+}
 
 module.exports.getCalendarEvents = async (event) => {
-  const oAuth2Client = new OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new OAuth2(client_id, client_secret, redirect_uris[0])
 
   const access_token = decodeURIComponent(
     `${event.pathParameters.access_token}`
-  );
+  )
 
-  oAuth2Client.setCredentials({ access_token });
+  oAuth2Client.setCredentials({ access_token })
 
   return new Promise((resolve, reject) => {
     // Get list of events from 'fullstackwebdev' Google calendar
@@ -101,12 +101,12 @@ module.exports.getCalendarEvents = async (event) => {
       },
       (error, response) => {
         if (error) {
-          reject(error);
+          reject(error)
         } else {
-          resolve(response);
+          resolve(response)
         }
       }
-    );
+    )
   })
     .then((results) => {
       return {
@@ -118,14 +118,14 @@ module.exports.getCalendarEvents = async (event) => {
         body: JSON.stringify({
           events: results.data.items,
         }),
-      };
+      }
     })
     .catch((err) => {
       // Handle error
-      console.error(err);
+      console.error(err)
       return {
         statusCode: 500,
         body: JSON.stringify(err),
-      };
-    });
-};
+      }
+    })
+}

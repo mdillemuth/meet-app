@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Pie, PieChart, ResponsiveContainer, Cell } from 'recharts';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Pie, PieChart, ResponsiveContainer, Cell } from 'recharts'
 
 const DataPieChart = ({ data }) => {
-  const colors = ['#00b8a9', '#ff9a00', '#f6416c', '#17b978', '#6639a6'];
+  const colors = ['#00b8a9', '#ff9a00', '#f6416c', '#17b978', '#6639a6']
 
   return (
     <div className='data-pie-chart'>
@@ -31,11 +31,11 @@ const DataPieChart = ({ data }) => {
         </PieChart>
       </ResponsiveContainer>
     </div>
-  );
-};
+  )
+}
 
 DataPieChart.propTypes = {
   data: PropTypes.array.isRequired,
-};
+}
 
-export default DataPieChart;
+export default DataPieChart

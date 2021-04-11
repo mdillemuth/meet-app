@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import moment from 'moment'
 
 class Event extends Component {
   state = {
     isExpanded: false, // Event is collapsed by default
-  };
+  }
 
   // Toggle expand/collapse event on click
   handleExpandEvent = () => {
     if (this.state.isExpanded === false) {
       this.setState({
         isExpanded: true,
-      });
+      })
     } else {
       this.setState({
         isExpanded: false,
-      });
+      })
     }
-  };
+  }
 
   // The elements displayed when event is expanded
   renderExpandedComponent = () => {
-    const { event } = this.props;
+    const { event } = this.props
 
     if (this.state.isExpanded) {
       return (
@@ -40,24 +40,24 @@ class Event extends Component {
           </div>
           <p className='description'>{event.description}</p>
         </div>
-      );
+      )
     }
-  };
+  }
 
   // Toggles button text
   renderButtonText = () => {
-    return !this.state.isExpanded ? 'Show details' : 'Hide details';
-  };
+    return !this.state.isExpanded ? 'Show details' : 'Hide details'
+  }
 
   // Reformats time data using moment.js
   renderTime = () => {
-    const time = this.props.event.start.dateTime;
-    const formattedTime = moment(time, 'YYYY-MM-DD HH:mm').toDate();
-    return <span className='start-dateTime'>{`${formattedTime}`}</span>;
-  };
+    const time = this.props.event.start.dateTime
+    const formattedTime = moment(time, 'YYYY-MM-DD HH:mm').toDate()
+    return <span className='start-dateTime'>{`${formattedTime}`}</span>
+  }
 
   render() {
-    const { event } = this.props;
+    const { event } = this.props
 
     return (
       <div className='Event'>
@@ -80,12 +80,12 @@ class Event extends Component {
           {this.renderButtonText()}
         </button>
       </div>
-    );
+    )
   }
 }
 
 Event.propTypes = {
   event: PropTypes.object.isRequired,
-};
+}
 
-export default Event;
+export default Event
