@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import DataScatterPlot from './DataScatterPlot';
-import DataPieChart from './DataPieChart';
+import React, { useState, useEffect } from 'react'
+import DataScatterPlot from './DataScatterPlot'
+import DataPieChart from './DataPieChart'
 
 const DataVisualization = ({ events, locations }) => {
   useEffect(() => {
-    setPieData(() => getPieData());
-  }, [events]);
+    setPieData(() => getPieData())
+  }, [events])
 
-  const [pieData, setPieData] = useState([]);
+  const [pieData, setPieData] = useState([])
 
   // Gets frequency of event genres for pie chart
   const getPieData = () => {
-    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS']
     const summary = events.map((event) => {
-      const eventSummary = event.summary;
-      return { eventSummary };
-    });
+      const eventSummary = event.summary
+      return { eventSummary }
+    })
 
     const data = genres.map((genre) => {
-      const name = genre;
+      const name = genre
 
       const value = summary.filter((summary) =>
         summary.eventSummary.split(' ').includes(name)
-      ).length;
+      ).length
       // Filter name and genre again here
-      return { name, value };
-    });
+      return { name, value }
+    })
 
-    return data.filter((data) => data.value >= 1);
-  };
+    return data.filter((data) => data.value >= 1)
+  }
 
   // Gets total number of events happening in each city for scatter plot
   const getScatterData = () => {
     const data = locations.map((location) => {
       const number = events.filter((event) => event.location === location)
-        .length;
-      const city = location.split(' ').shift();
-      return { city, number };
-    });
-    return data;
-  };
+        .length
+      const city = location.split(' ').shift()
+      return { city, number }
+    })
+    return data
+  }
 
   return (
     <div className='data-vis-wrapper'>
@@ -52,7 +52,7 @@ const DataVisualization = ({ events, locations }) => {
         <DataScatterPlot data={getScatterData()} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DataVisualization;
+export default DataVisualization
